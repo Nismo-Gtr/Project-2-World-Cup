@@ -1,9 +1,28 @@
-// File not connected to login.js
-// var login = require("./login");
+// Dependencies
+// =============================================================
+var express = require("express");
+var bodyParser = require("body-parser");
+var path = require("path");
+
+// Sets up the Express App
+// =============================================================
+var app = express();
+var PORT = 3000;
+
+// Sets up the Express app to handle data parsing
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use(express.static("public"));
+
+// get route for login page
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "login.html"));
+});
 
 // Check for user credentials match
 app.post("/authenticate", function (req, res) {
-    console.log("request", req.body)
+    console.log("post request - req.body: ", req.body)
     // getting http body from client which contains the captured user credentials. 
     // make sql query (or check in firebase) for matching credentials. 
 
@@ -16,4 +35,11 @@ app.post("/authenticate", function (req, res) {
         //     res.json({ id: result.insertId, devoured: false });
         //     console.log({ id: result.insertId });
         // });
+        
 });
+
+// Starts the server to begin listening
+// =============================================================
+app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });

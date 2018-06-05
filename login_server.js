@@ -22,7 +22,7 @@ app.get("/", function (req, res) {
 
 // Check for user credentials match
 app.post("/authenticate", function (req, res) {
-    console.log("post request - req.body: ", req.body)
+    console.log("POST request - req.body: ", req.body)
     // getting http body from client which contains the captured user credentials. 
     // make sql query (or check in firebase) for matching credentials. 
 
@@ -35,6 +35,7 @@ app.post("/authenticate", function (req, res) {
         //     res.json({ id: result.insertId, devoured: false });
         //     console.log({ id: result.insertId });
         // });
+    res.send(req.body);
         
 });
 

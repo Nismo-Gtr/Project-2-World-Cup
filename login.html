@@ -5,134 +5,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./loginstyle2.css">
     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+
     <title>LOGIN PAGE</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <!-- Brand/logo -->
-        <a class="navbar-brand" href="#">WORLD CUP 2018</a>
 
-        <!-- Links -->
-        <ul class="navbar-nav">
-
-            <li class="nav-item">
-                <button type="button" class="btn btn-success">LOGIN</button>
-
-                
-            </li>
-        </ul>
-    </nav>
     <div class="container">
 
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <div class="omb_login">
-                    <h3 class="omb_authTitle">Login or
-                        <a href="#" id="signup">Sign up</a>
-                    </h3>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <div class="omb_login">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">WORLD CUP 2018</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <!-- LOGIN button -->
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal" id="modalButton">
+                            LOGIN
+                        </button>
+                        <!-- LOGIN MODAL -->
+                        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center">
+                                        <h5 class="modal-title text-center" id="exampleModalLongTitle">Login</h5>
 
-                    <div class="row omb_row-sm-offset-3 omb_socialButtons">
-                        <div class="col-xs-4 col-sm-2">
-                            <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
-                                <i class="fa fa-facebook visible-xs"></i>
-                                <span class="hidden-xs">Facebook</span>
-                            </a>
-                        </div>
-                        <div class="col-xs-4 col-sm-2">
-                            <a href="#" class="btn btn-lg btn-block omb_btn-twitter">
-                                <i class="fa fa-twitter visible-xs"></i>
-                                <span class="hidden-xs">Twitter</span>
-                            </a>
-                        </div>
-                        <div class="col-xs-4 col-sm-2">
-                            <a href="#" class="btn btn-lg btn-block omb_btn-google">
-                                <i class="fa fa-google-plus visible-xs"></i>
-                                <span class="hidden-xs">Google</span>
-                            </a>
-                        </div>
-                    </div>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h2 class="text-center">SIGN IN WITH</h2>
+                                        <div class="row buttonRow">
+                                            <div class="col-md-4 buttonSpacing">
+                                                <button type="button" class="btn btn-success">Facebook</button>
+                                            </div>
+                                            <div class="col-md-4 buttonSpacing">
+                                                <button type="button" class="btn btn-success">Twitter</button>
+                                            </div>
+                                            <div class="col-md-4 buttonSpacing">
+                                                <button type="button" class="btn btn-success">Google</button>
+                                            </div>
 
-                    <div class="row omb_row-sm-offset-3 omb_loginOr">
-                        <div class="col-xs-12 col-sm-6">
-                            <hr class="omb_hrOr">
-                            <span class="omb_spanOr">OR</span>
-                        </div>
-                    </div>
+                                        </div>
 
-                    <div class="row omb_row-sm-offset-3">
-                        <div class="col-xs-12 col-sm-6">
-                            <form class="omb_loginForm" action="" autocomplete="off" method="POST">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </span>
-                                    <input type="text" class="form-control" name="username" placeholder="email address" id="userID">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h2 class="text-center">OR</h2>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Email address</label>
+                                                        <input type="email" class="form-control" id="loginID" aria-describedby="emailHelp" placeholder="Enter email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Password</label>
+                                                        <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" id="exampleCheck0">
+                                                        <label class="form-check-label" for="exampleCheck0">Remember Me</label>
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-md-12 buttonRow">
+                                                            <button class="btn btn-lg btn-primary btn-block" id="loginButton" type="submit">Login</button>
+
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <!-- END OF MODAL -->
+                    </li>
 
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-lock"></i>
-                                    </span>
-                                    <input type="password" class="form-control" name="password" placeholder="Password" id="password">
+                    <li class="nav-item active">
+                        <!-- SIGN UP button -->
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#signupModal" id="modalButton">
+                            SIGN UP
+                        </button>
+                        <!-- SIGN UP MODAL -->
+                        <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center">
+                                        <h5 class="modal-title text-center" id="exampleModalLongTitle">Login</h5>
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h2 class="text-center">SIGN IN WITH</h2>
+                                        <div class="row buttonRow">
+                                            <div class="col-md-4 buttonSpacing">
+                                                <button type="button" class="btn btn-success">Facebook</button>
+                                            </div>
+                                            <div class="col-md-4 buttonSpacing">
+                                                <button type="button" class="btn btn-success">Twitter</button>
+                                            </div>
+                                            <div class="col-md-4 buttonSpacing">
+                                                <button type="button" class="btn btn-success">Google</button>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h2 class="text-center">OR</h2>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Username</label>
+                                                        <input type="text" class="form-control" id="userName" aria-describedby="emailHelp" placeholder="username">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Email address</label>
+                                                        <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Password</label>
+                                                        <input type="password" class="form-control" id="userPassword" placeholder="Password">
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-md-12 buttonRow">
+                                                            <button class="btn btn-lg btn-primary btn-block" id="signupButton" type="submit">Sign Up</button>
+
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                 </div>
-                                <!-- <span class="help-block">Password error</span> -->
-
-                                <button class="btn btn-lg btn-primary btn-block" id="loginButton" type="submit">Login</button>
-                            </form>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row omb_row-sm-offset-3">
-                        <div class="col-xs-12 col-sm-3">
-                            <label class="checkbox">
-                                <input type="checkbox" value="remember-me">Remember Me
-                            </label>
-                        </div>
-                        <div class="col-xs-12 col-sm-3">
-                            <p class="omb_forgotPwd">
-                                <a href="#">Forgot password?</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                        <!-- END OF MODAL -->
+                    </li>
+                </ul>
             </div>
-            <div class="col-md-1"></div>
-        </div>
-
-
-
+        </nav>
 
     </div>
-    <!-- FIREBASE
-    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyA5y8GqPO0dVFs5xshZiFdjKgVgN9OlO0M",
-            authDomain: "world-cup-2018-2e7ca.firebaseapp.com",
-            databaseURL: "https://world-cup-2018-2e7ca.firebaseio.com",
-            projectId: "world-cup-2018-2e7ca",
-            storageBucket: "world-cup-2018-2e7ca.appspot.com",
-            messagingSenderId: "621397211278"
-        };
-        firebase.initializeApp(config);
-    </script> -->
+
     <!-- JAVASCRIPT AND JQUERY -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="./login.js"></script>
 </body>

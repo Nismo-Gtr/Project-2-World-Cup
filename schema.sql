@@ -17,7 +17,6 @@ CREATE TABLE `stadiums` (
   `lat`  FLOAT ( 11 ) NOT NULL,
   `lng` FLOAT ( 11 ) NOT NULL,
   `image` VARCHAR ( 255 ) NOT NULL,
-  `created_at` DATETIME NOT NULL,
 
   PRIMARY KEY ( `id` ) 
 );
@@ -29,7 +28,6 @@ CREATE TABLE `brackets` (
   `stadium` VARCHAR ( 255 ) NOT NULL,
   `channels` VARCHAR ( 255 ) NOT NULL,
   `matchday` VARCHAR ( 255 ) NOT NULL,
-  `created_at` DATETIME NOT NULL,
 
   PRIMARY KEY ( `id` ) 
 );

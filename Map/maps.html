@@ -304,6 +304,7 @@
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
       // locate you.
+
       // var map, infoWindow;
       // function initMap() {
       //   map = new google.maps.Map(document.getElementById('map'), {
@@ -311,6 +312,59 @@
       //     zoom: 11
       //   });
       //   infoWindow = new google.maps.InfoWindow;
+
+      var map, infoWindow;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 11
+        });
+      
+
+        var icons = {
+            watchParty: {
+                name: "Viewing Party",
+                icon: "icon image address goes here"
+            },
+
+            placesToWatch: {
+                name: "Places to Watch",
+                icon: "icon image address goes here"
+            }
+        };
+
+        
+        var features = [
+          {
+            position: new google.maps.LatLng(-33.91721, 151.22630),
+            type: 'Viewing Party'
+          }, {
+            position: new google.maps.LatLng(-33.91539, 151.22820),
+            type: 'Places to Watch'
+          }
+      ]
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent("You're Here!");
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
 
       //   var icons = {
       //       watchParty: {

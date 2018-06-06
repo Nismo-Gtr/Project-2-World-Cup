@@ -20,6 +20,9 @@ $(document).ready(function () {
 
     // User profile that is loaded
     var currentUser;
+    $('#logoutButton').hide();
+
+
 
     $("#loginButton").on("click", function () {
         event.preventDefault();
@@ -30,41 +33,50 @@ $(document).ready(function () {
             password: $("#loginPassword").val().trim()
         }
 
-        console.log("userCredentials", userCredentials);
+        // Adding Firebase Auth
+        const auth = firebase.auth();
+        // Sign in with email and password
+        const promise = auth.signInWithEmailAndPassword(userCredentials.email, userCredentials.password);
+        // This logs an error if above sign in is unsuccessful
+        promise.catch(e => console.log(e.message));
+        console.log('logged in');
+        console.log('user is ');
+
+        $('#loggedInUser').text('Welcome ' + userCredentials.username);
+
 
         // This whole things works even without a post request. Is a post request necessary? 
-
         // Send the POST request.
         // if (userCredentials.email && userCredentials.password) {
-        $.ajax("/authenticate", {
-            type: "POST",
-            data: userCredentials
-        }).then(function (response) {
-            console.log("About to check user credentials in firebase now");
-            // Reload the page to get the updated list
-            // location.reload();
-            // console.log("POST response: ", response);
-            // console.log("response.email: ", response.email);
-            // console.log("response.password: ", response.password);
+        // $.ajax("/authenticate", {
+        //     type: "POST",
+        //     data: userCredentials
+        // }).then(function (response) {
+        //     console.log("About to check user credentials in firebase now");
+        //     // Reload the page to get the updated list
+        //     // location.reload();
+        //     // console.log("POST response: ", response);
+        //     // console.log("response.email: ", response.email);
+        //     // console.log("response.password: ", response.password);
 
-            // check the database for matching email/password pairs
-            database.ref().on("value", function (snapshot) {
-                data = snapshot.val();
-                // console.log("DATA: ", data);
-                // console.log("==========================");
-                var keys = Object.keys(data);
-                for (var i = 0; i < keys.length; i++) {
-                    // console.log("data[keys[i]].email", data[keys[i]].email);
-                    if (response.email === data[keys[i]].email && response.password === data[keys[i]].password) {
-                        console.log("username and password combinations EXISTS");
-                        currentUser = [keys[i]];
-                        console.log(currentUser);
-                        // add username for each user. then you can access currentUser.username
-                    }
-                }
-            });
+        //     // check the database for matching email/password pairs
+        //     database.ref().on("value", function (snapshot) {
+        //         data = snapshot.val();
+        //         // console.log("DATA: ", data);
+        //         // console.log("==========================");
+        //         var keys = Object.keys(data);
+        //         for (var i = 0; i < keys.length; i++) {
+        //             // console.log("data[keys[i]].email", data[keys[i]].email);
+        //             if (response.email === data[keys[i]].email && response.password === data[keys[i]].password) {
+        //                 console.log("username and password combinations EXISTS");
+        //                 currentUser = [keys[i]];
+        //                 console.log(currentUser);
+        //                 // add username for each user. then you can access currentUser.username
+        //             }
+        //         }
+        //     });
 
-        });
+        // });
 
 
         // }
@@ -83,30 +95,153 @@ $(document).ready(function () {
             password: $("#userPassword").val().trim()
         }
 
-        console.log("userCredentials", userCredentials);
+        // Adding Firebase Auth
+        const auth = firebase.auth();
+        // Sign in with email and password
+        const promise = auth.createUserWithEmailAndPassword(userCredentials.email, userCredentials.password);
+        // This logs an error if above sign in is unsuccessful
+        promise.catch(e => console.log(e.message));
+
+
 
         // Send the POST request.
         // if (userCredentials.email && userCredentials.password) {
-        $.ajax("/authenticate", {
-            type: "POST",
-            data: userCredentials
-        }).then(function (response) {
-            console.log("About to check user credentials in firebase now");
-            // Reload the page to get the updated list
-            // location.reload();
-            console.log("POST response: ", response);
-            console.log("response.username", response.username);
-            console.log("response.email: ", response.email);
-            console.log("response.password: ", response.password);
-            database.ref().push(response);
+        // $.ajax("/authenticate", {
+        //     type: "POST",
+        //     data: userCredentials
+        // }).then(function (response) {
+        //     console.log("About to check user credentials in firebase now");
+        //     // Reload the page to get the updated list
+        //     // location.reload();
+        //     console.log("POST response: ", response);
+        //     console.log("response.username", response.username);
+        //     console.log("response.email: ", response.email);
+        //     console.log("response.password: ", response.password);
+        //     database.ref().push(response);
 
-        });
+        // });
 
 
         // }
 
     });
 
-    // oauth2 page for facebook, twitter and google.
+    // Add a realtime listener for auth state change
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+        if (firebaseUser) {
+
+
+            var displayName = firebaseUser.displayName;
+            var email = firebaseUser.email;
+            var emailVerified = firebaseUser.emailVerified;
+            var photoURL = firebaseUser.photoURL;
+            var isAnonymous = firebaseUser.isAnonymous;
+            var uid = firebaseUser.uid;
+            var providerData = firebaseUser.providerData;
+
+            $('#logoutButton').show();
+            $('#loggedInUser').text('Welcome ' + firebaseUser.displayName);
+            $('#myPhoto').attr("src", firebaseUser.photoURL);
+            $('#loginModal').modal('hide');
+            $('#signupModal').modal('hide');
+            $('#loginModalButton').hide();
+            $('#signupModalButton').hide();
+
+            console.log('display name: ', displayName);
+            console.log('email', email);
+            console.log('email verfired: ', emailVerified);
+            console.log('photourl: ', photoURL);
+            console.log('uid: ', uid);
+            console.log('providerdata: ', providerData);
+
+        } else {
+            console.log('no user logged in');
+            $('#logoutButton').hide();
+            $('#loginModalButton').show();
+            $('#signupModalButton').show();
+            $('#loggedInUser').empty();
+        }
+    });
+
+    // LOGOUT BUTTON
+    $('#logoutButton').on('click', e => {
+        firebase.auth().signOut();
+    });
+
+    // Firebase Google Login
+    $(".googleButton").on("click", function () {
+        console.log('clicked google');
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        firebase.auth().signInWithPopup(provider).then(function (result) {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+            // ...
+        }).catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+        });
+
+    });
+
+    // Firebase Twitter Login 
+    $(".twitterButton").on("click", function () {
+        console.log('clicked twitter');
+        var provider = new firebase.auth.TwitterAuthProvider();
+        firebase.auth().signInWithPopup(provider).then(function (result) {
+            // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+            // You can use these server side with your app's credentials to access the Twitter API.
+            var token = result.credential.accessToken;
+            var secret = result.credential.secret;
+
+            console.log(token);
+            console.log(user);
+            // The signed-in user info.
+            var user = result.user;
+            console.log(user);
+            // ...
+        }).catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+        });
+
+    });
+
+    // Firebase Facebook Login 
+    $(".facebookButton").on("click", function () {
+        console.log('clicked facebook');
+        var provider = new firebase.auth.FacebookAuthProvider();
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+            // ...
+          }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+          });
+
+    });
 
 });

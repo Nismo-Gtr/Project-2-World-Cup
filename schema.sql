@@ -29,7 +29,6 @@ CREATE TABLE `brackets` (
   `stadium` VARCHAR ( 255 ) NOT NULL,
   `channels` VARCHAR ( 255 ) NOT NULL,
   `matchday` VARCHAR ( 255 ) NOT NULL,
-  `created_at` DATETIME NOT NULL,
 
   PRIMARY KEY ( `id` ) 
 );

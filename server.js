@@ -39,7 +39,7 @@ unirest.get("https://montanaflynn-fifa-world-cup.p.mashape.com/teams")
     //console.log(java.cupData.teams);
     //respond to API call res.render etc
 
-    //console.log(java.cupData);
+    console.log(cDat);
   });
 
 unirest.get("https://montanaflynn-fifa-world-cup.p.mashape.com/rounds")

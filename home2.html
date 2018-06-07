@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
     <link href="/assets/style2.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <title>FIFA World Cup</title>
 </head>
@@ -47,7 +48,7 @@
 
     <main>
         <!-- CAROUSEL -->
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <section id="carouselExampleIndicators" class="carousel slide fullheight" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-ride="carousel" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -72,25 +73,23 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
-        </div>
+        </section>
 
-        <div class="fullscreen-bg">
+        <!-- VIDEO -->
+        <section class="fullscreen-bg fullheight">
             <video loop muted autoplay poster="/assets/Video/Soccer_Clip_for_Project_two.mp4" class="fullscreen-bg__video">
                 <source src="/assets/Video/Soccer_Clip_for_Project_two.mp4" type="video/webm">
                 <source src="/assets/Video/Soccer_Clip_for_Project_two.mp4" type="video/mp4">
                 <source src="/assets/Video/Soccer_Clip_for_Project_two.mp4" type="video/ogg">
             </video>
-        </div>
+        </section>
 
         <!-- CONTENT -->
-        <h1 class="site-heading text-center text-white d-none d-lg-block">
-            <span class="site-heading-upper text-primary mb-3">FIFA World Cup</span>
-            <span class="site-heading-lower">The Ultimate Experience</span>
-        </h1>
-
-
         <section class="page-section clearfix">
-            </div>
+            <h1 class="site-heading text-center text-white d-none d-lg-block">
+                <span class="site-heading-upper mb-3">FIFA World Cup</span>
+                <span class="site-heading-lower">The Ultimate Experience</span>
+            </h1>
             <div class="container-1">
                 <div class="intro">
                     <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="img/intro.jpg" alt="">
@@ -111,7 +110,7 @@
         </section>
 
         <!-- CARDS -->
-        <div class="container">
+        <section class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="post-preview" data-aos="fade-up" data-aos-duration="3000">
@@ -172,6 +171,7 @@
                     </div>
                 </div>
             </div>
+        </section>
     </main>
 
     <footer>
@@ -180,28 +180,18 @@
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <ul class="list-inline text-center">
                         <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
+                            <a href="https://instagram.com">
+                                <i class="fab fa-instagram"></i>
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                </span>
+                            <a href="https://facebook.com">
+                                <i class="fab fa-facebook-f"></i>
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="#">
-                                <img src="facebook.svg" alt="">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
+                            <a href="https://twitter.com">
+                                    <i class="fab fa-twitter"></i>
                             </a>
                         </li>
                     </ul>

@@ -1,36 +1,27 @@
-.fullscreen-bg {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-  z-index: -100;
-}
-
-.fullscreen-bg__video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: -100;
-}
 body{
     font-family: 'Lora';
     background: rgba(4, 0, 0, 0.31);
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
+    color: white;
 }
 
 header {
-    border: 1px solid red;
     color: white;
+}
+
+nav#mainNav {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100 */
+background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
 }
 
 #mainNav {
     position: absolute;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: none;
     background-color: white;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
@@ -62,7 +53,7 @@ header {
 
   @media only screen and (min-width: 992px) {
     #mainNav {
-      border-bottom: 1px solid transparent;
+      border-bottom: none;
       background: transparent;
     }
     #mainNav .navbar-brand {
@@ -103,16 +94,16 @@ header {
       -moz-transition: -moz-transform 0.2s;
       transition: transform 0.2s;
       border-bottom: 0px solid white;
-      background-color: rgba(255, 255, 255, 0.9);
+      
     }
     #mainNav.is-fixed .navbar-brand {
-      color: #212529;
+      color: #ffffff;
     }
     #mainNav.is-fixed .navbar-brand:focus, #mainNav.is-fixed .navbar-brand:hover {
       color: #0085A1;
     }
     #mainNav.is-fixed .navbar-nav > li.nav-item > a {
-      color: #212529;
+      color: #ffffff;
     }
     #mainNav.is-fixed .navbar-nav > li.nav-item > a:focus, #mainNav.is-fixed .navbar-nav > li.nav-item > a:hover {
       color: #0085A1;
@@ -128,10 +119,30 @@ header {
   }
 
 main {
-    border: 1px solid green;
+    
 }
 
+fullheight {
+  min-height: 100vh;
+}
 
+.fullscreen-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -100;
+}
+
+.fullscreen-bg__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -100;
+}
 
 /* <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"> */
 
@@ -145,8 +156,20 @@ main {
 
 /* Attr: [data-ride] {  border: 5px solid purple; } */
 
+h1 {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100 */
+  background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+}
+
+
+a {
+  color: white;
+}
+
 footer {
-    border: 1px solid blue;
     background-color: rgb(194, 191, 191);
         padding: 50px 0 65px;
         margin: 0;
@@ -157,7 +180,12 @@ footer .copyright {
     font-size: 14px;
     margin-bottom: 0;
     text-align: center;
-  }
+}
+
+footer .fab {
+  font-size: 2em;
+  color: black;
+}
 
 #navbarResponsive .nav-item {
   color: white;

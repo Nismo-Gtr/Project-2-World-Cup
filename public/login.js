@@ -20,6 +20,7 @@ $(document).ready(function () {
 
     // User profile that is loaded
     var currentUser;
+    var userDisplayName;
     $('#logoutButton').hide();
 
 
@@ -33,58 +34,71 @@ $(document).ready(function () {
             password: $("#loginPassword").val().trim()
         }
 
-        // Adding Firebase Auth
-        const auth = firebase.auth();
-        // Sign in with email and password
-        const promise = auth.signInWithEmailAndPassword(userCredentials.email, userCredentials.password);
-        // This logs an error if above sign in is unsuccessful
-        promise.catch(e => console.log(e.message));
-        console.log('logged in');
-        console.log('user is ');
+        // // Adding Firebase Auth
+        // const auth = firebase.auth();
+        // // Sign in with email and password
+        // const promise = auth.signInWithEmailAndPassword(userCredentials.email, userCredentials.password);
+        // // This logs an error if above sign in is unsuccessful
+        // promise.catch(e => console.log(e.message));
+        // console.log('logged in');
+        // console.log('user is ');
 
-        $('#loggedInUser').text('Welcome ' + userCredentials.username);
+        // $('#loggedInUser').text('Welcome ' + userCredentials.username);
 
 
         // This whole things works even without a post request. Is a post request necessary? 
         // Send the POST request.
-        // if (userCredentials.email && userCredentials.password) {
-        // $.ajax("/authenticate", {
-        //     type: "POST",
-        //     data: userCredentials
-        // }).then(function (response) {
-        //     console.log("About to check user credentials in firebase now");
-        //     // Reload the page to get the updated list
-        //     // location.reload();
-        //     // console.log("POST response: ", response);
-        //     // console.log("response.email: ", response.email);
-        //     // console.log("response.password: ", response.password);
+        if (userCredentials.email && userCredentials.password) {
+            $.ajax("/authenticate", {
+                type: "POST",
+                data: userCredentials
+            }).then(function (response) {
+                console.log("About to check user credentials in firebase now");
+                // Reload the page to get the updated list
+                // location.reload();
+                // console.log("POST response: ", response);
+                // console.log("response.email: ", response.email);
+                // console.log("response.password: ", response.password);
 
-        //     // check the database for matching email/password pairs
-        //     database.ref().on("value", function (snapshot) {
-        //         data = snapshot.val();
-        //         // console.log("DATA: ", data);
-        //         // console.log("==========================");
-        //         var keys = Object.keys(data);
-        //         for (var i = 0; i < keys.length; i++) {
-        //             // console.log("data[keys[i]].email", data[keys[i]].email);
-        //             if (response.email === data[keys[i]].email && response.password === data[keys[i]].password) {
-        //                 console.log("username and password combinations EXISTS");
-        //                 currentUser = [keys[i]];
-        //                 console.log(currentUser);
-        //                 // add username for each user. then you can access currentUser.username
-        //             }
-        //         }
-        //     });
+                // check the database for matching email/password pairs
+                database.ref().on("value", function (snapshot) {
+                    data = snapshot.val();
+                    // console.log("DATA: ", data);
+                    // console.log("==========================");
+                    var keys = Object.keys(data);
+                    for (var i = 0; i < keys.length; i++) {
+                        // console.log("data[keys[i]].email", data[keys[i]].email);
+                        if (response.email === data[keys[i]].email && response.password === data[keys[i]].password) {
+                            console.log("username and password combinations EXISTS");
+                            currentUser = {
+                                id: [keys[i]],
+                                email: data[keys[i]].email,
+                                username: data[keys[i]].username
+                            }
 
-        // });
+                            // we can go ahead and redirect to another view here using data from currentUser.
+                            console.log(currentUser);
+                            console.log(data[keys[i]]);
+
+                            $('#logoutButton').show();
+                            $('#loginModal').modal('hide');
+                            $('#signupModal').modal('hide');
+                            $('#loginModalButton').hide();
+                            $('#signupModalButton').hide();
+                            $('#jumbotron').removeClass('d-none');
+                            $('#loggedInUser').text('Welcome ' + data[keys[i]].username);
+                        }
+                    }
+                });
+
+            });
 
 
-        // }
+        }
 
     });
 
-    // signup page
-
+    // Sign Up is via username, email and password
     $("#signupButton").on("click", function () {
         event.preventDefault();
 
@@ -95,34 +109,39 @@ $(document).ready(function () {
             password: $("#userPassword").val().trim()
         }
 
-        // Adding Firebase Auth
-        const auth = firebase.auth();
-        // Sign in with email and password
-        const promise = auth.createUserWithEmailAndPassword(userCredentials.email, userCredentials.password);
-        // This logs an error if above sign in is unsuccessful
-        promise.catch(e => console.log(e.message));
+        // // Adding Firebase Auth
+        // const auth = firebase.auth();
+        // // Sign in with email and password
+        // const promise = auth.createUserWithEmailAndPassword(userCredentials.email, userCredentials.password);
+        // // This logs an error if above sign in is unsuccessful
+        // promise.catch(e => console.log(e.message));
 
+        // Send the POST request if sign up is via username, email and password
+        if (userCredentials.username && userCredentials.email && userCredentials.password) {
+            $.ajax("/authenticate", {
+                type: "POST",
+                data: userCredentials
+            }).then(function (response) {
+                console.log("About to check user credentials in firebase now");
+                // Reload the page to get the updated list
+                // location.reload();
+                userDisplayName = response.username;
+                console.log("POST response: ", response);
+                console.log('We have a new user');
+                console.log("response.username", response.username);
+                console.log("response.email: ", response.email);
+                console.log("response.password: ", response.password);
+                database.ref().push(response);
+                $('#logoutButton').show();
+                $('#loggedInUser').text('Welcome ' + userDisplayName);
+                $('#loginModal').modal('hide');
+                $('#signupModal').modal('hide');
+                $('#loginModalButton').hide();
+                $('#signupModalButton').hide();
+                $('#jumbotron').removeClass('d-none');
 
-
-        // Send the POST request.
-        // if (userCredentials.email && userCredentials.password) {
-        // $.ajax("/authenticate", {
-        //     type: "POST",
-        //     data: userCredentials
-        // }).then(function (response) {
-        //     console.log("About to check user credentials in firebase now");
-        //     // Reload the page to get the updated list
-        //     // location.reload();
-        //     console.log("POST response: ", response);
-        //     console.log("response.username", response.username);
-        //     console.log("response.email: ", response.email);
-        //     console.log("response.password: ", response.password);
-        //     database.ref().push(response);
-
-        // });
-
-
-        // }
+            });
+        }
 
     });
 
@@ -130,8 +149,7 @@ $(document).ready(function () {
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
 
-
-            var displayName = firebaseUser.displayName;
+            displayName = firebaseUser.displayName;
             var email = firebaseUser.email;
             var emailVerified = firebaseUser.emailVerified;
             var photoURL = firebaseUser.photoURL;
@@ -139,20 +157,52 @@ $(document).ready(function () {
             var uid = firebaseUser.uid;
             var providerData = firebaseUser.providerData;
 
-            $('#logoutButton').show();
-            $('#loggedInUser').text('Welcome ' + firebaseUser.displayName);
-            $('#myPhoto').attr("src", firebaseUser.photoURL);
-            $('#loginModal').modal('hide');
-            $('#signupModal').modal('hide');
-            $('#loginModalButton').hide();
-            $('#signupModalButton').hide();
+            // Capturing user email and password and saving to local temporary object
+            var userCredentials = {
+                username: displayName,
+                email: email,
+                password: uid
+            }
 
-            console.log('display name: ', displayName);
-            console.log('email', email);
-            console.log('email verfired: ', emailVerified);
-            console.log('photourl: ', photoURL);
-            console.log('uid: ', uid);
-            console.log('providerdata: ', providerData);
+            //Send POST request to save user information in firebase database
+            $.ajax("/authenticate", {
+                type: "POST",
+                data: userCredentials
+            }).then(function (response) {
+                console.log("About to check user credentials in firebase now");
+                // Reload the page to get the updated list
+                // location.reload();
+                userDisplayName = response.username;
+                console.log("POST response: ", response);
+                console.log('We have a new user');
+                console.log("response.username", response.username);
+                console.log("response.email: ", response.email);
+                console.log("response.password: ", response.password);
+                database.ref().push(response);
+                $('#logoutButton').show();
+                $('#loggedInUser').text('Welcome ' + userDisplayName);
+                $('#loginModal').modal('hide');
+                $('#signupModal').modal('hide');
+                $('#loginModalButton').hide();
+                $('#signupModalButton').hide();
+                $('#jumbotron').removeClass('d-none');
+
+            });
+
+            // $('#logoutButton').show();
+            // // $('#loggedInUser').text('Welcome ' + displayName);
+            // $('#loginModal').modal('hide');
+            // $('#signupModal').modal('hide');
+            // $('#loginModalButton').hide();
+            // $('#signupModalButton').hide();
+
+            // console.log('userdisplayname:', userDisplayName);
+            // console.log('display name: ', displayName);
+            // console.log('email', email);
+            // console.log('email verfired: ', emailVerified);
+            // console.log('photourl: ', photoURL);
+            // console.log('uid: ', uid);
+            // console.log('providerdata: ', providerData);
 
         } else {
             console.log('no user logged in');
@@ -225,13 +275,13 @@ $(document).ready(function () {
     $(".facebookButton").on("click", function () {
         console.log('clicked facebook');
         var provider = new firebase.auth.FacebookAuthProvider();
-        firebase.auth().signInWithPopup(provider).then(function(result) {
+        firebase.auth().signInWithPopup(provider).then(function (result) {
             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
             var token = result.credential.accessToken;
             // The signed-in user info.
             var user = result.user;
             // ...
-          }).catch(function(error) {
+        }).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -240,7 +290,7 @@ $(document).ready(function () {
             // The firebase.auth.AuthCredential type that was used.
             var credential = error.credential;
             // ...
-          });
+        });
 
     });
 

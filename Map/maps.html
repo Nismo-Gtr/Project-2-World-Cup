@@ -255,14 +255,46 @@
           $('#myInput').trigger('focus')
         })
 
+   // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
 
-    var map;
-    function initMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
-        center: new google.maps.LatLng(41.8781, -87.6298),
-        mapTypeId: 'roadmap'
-      });
+        var map, infoWindow;
+        function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            mapTypeId: 'roadmap'
+          });
+          infoWindow = new google.maps.InfoWindow;
+
+          // Try HTML5 geolocation.
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+              var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              };
+
+              infoWindow.setPosition(pos);
+              infoWindow.setContent('You are here!');
+              infoWindow.open(map);
+              map.setCenter(pos);
+            }, function () {
+              handleLocationError(true, infoWindow, map.getCenter());
+            });
+          } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+          }
+        
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+          infoWindow.setPosition(pos);
+          infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+          infoWindow.open(map);
+        }
 
       var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
       var icons = {
@@ -281,7 +313,7 @@
             '</div>' +
             '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p><img src="./globe.jpeg">' +  
             '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
             '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
             '<p><strong>Phone: </strong>(312) 836-0066</p>' +
@@ -321,9 +353,9 @@
           description:    '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
-            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<h6 id="firstHeading" class="firstHeading">Theory</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p><img src="./theory.jpeg">' +  
             '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
             '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
             '<p><strong>Phone: </strong>(773) 871-3757</p>' +
@@ -335,12 +367,12 @@
           description:    '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
-            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<h6 id="firstHeading" class="firstHeading">The Scout Waterhouse + Kitchen</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
-            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
-            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '<p>Rustic watering hole with a long beer list, souped-up pub grub, lots of TVs & patio seating.</p><img src="./scoutwaterhouse.jpeg">' +  
+            '<p><strong>Address: </strong><br>1301 S Wabash Ave, Chicago, IL 60605<br>' + 
+            '<strong>Hours: </strong><br>Monday--Friday 2PM-2AM<br>Saturday 10AM-2AM<br>Sunday 10AM-2AM<br></p>' +
+            '<p><strong>Phone: </strong>(312) 705-0595</p>' +
             '</div>',
           type: 'info'
         }, {
@@ -349,12 +381,12 @@
           description:    '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
-            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<h6 id="firstHeading" class="firstHeading">Lincoln Park South Fields</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
-            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
-            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '<p>Stretch of Lincoln Park featuring multiple softball fields & ample green space along the lake shore.</p><img src="./lincolnpark.jpeg">' +  
+            '<p><strong>Address: </strong><br>1627 N Stockton Dr, Chicago, IL 60614<br>' + 
+            '<strong>Hours: </strong><br>Monday-Sunday 7AM-11PM<br></p>' +
+            '<p><strong>Phone: </strong>(312) 742-7726</p>' +
             '</div>',
           type: 'info'
         }, {
@@ -363,12 +395,12 @@
           description:    '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
-            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<h6 id="firstHeading" class="firstHeading">A.J. Hudson\'s Public House</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
-            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
-            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '<p>This relaxed pub offers multiple TVs for sports fans, a vast beer selection, snacks & sandwiches.</p><img src="./AJHudson.png">' +  
+            '<p><strong>Address: </strong><br>3801 N Ashland Ave, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-2AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 348-2767</p>' +
             '</div>',
           type: 'info'
         }, {
@@ -377,26 +409,26 @@
           description:    '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
-            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<h6 id="firstHeading" class="firstHeading">Chicago Fire Soccer Dome</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
-            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
-            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '<p>CIBC Fire Pitch has two full-size outdoor pitches from April through November and a 100,000-square-foot dome with multiple field configurations in the winter. The 12,500-square-foot clubhouse features Pub97 and restaurant, an outdoor patio, concessions, merchandise store, gym and meeting and party space.</p><img src="./firesoccerdome.jpeg">' +  
+            '<p><strong>Address: </strong><br>3626 N Talman Ave, Chicago, IL 60618<br>' + 
+            '<strong>Hours: </strong><br>Monday-Friday 7AM-11:30PM<br>Saturday 9AM-8PM<br>Sunday 9AM-10PM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 944-1086</p>' +
             '</div>',
           type: 'info'
         }, {
-          name: "Mckinley Park",
+          name: "McKinley Park",
           position: new google.maps.LatLng(41.8239, -87.6824),
           description:    '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
-            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<h6 id="firstHeading" class="firstHeading">McKinley Park</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
-            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
-            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '<p>McKinley Park, one of the 77 official community areas of Chicago, Illinois, is located on the city\'s southwest side.</p><img src="./mckinley.jpeg">' +  
+            '<p><strong>Address: </strong><br>2210 W Pershing Rd, Chicago, IL 60609<br>' + 
+            '<strong>Hours: </strong><br>Monday-Sunday 6AM-11PM<br></p>' +
+            '<p><strong>Phone: </strong>(312) 747-6527</p>' +
             '</div>',
           type: 'info'
         }, {
@@ -405,12 +437,12 @@
           description:    '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
-            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<h6 id="firstHeading" class="firstHeading">Hawthorne Soccer Field</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
-            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
-            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '<p>Public Soccer Field in Hawthorne Park District</p><img src="./hawthorne.jpeg">' +  
+            '<p><strong>Address: </strong><br>3215 S Central Ave, Cicero, IL 60804<br>' + 
+            '<strong>Hours: </strong><br>Monday-Sunday 6AM-11PM<br></p>' +
+            '<p><strong>Phone: </strong>(708) 863-6511</p>' +
             '</div>',
           type: 'info'
         }, {
@@ -419,12 +451,12 @@
           description:    '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
-            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<h6 id="firstHeading" class="firstHeading">Hopsmith Tavern</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
-            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
-            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '<p>Pub serving burgers, tacos & more in bi-level digs with 2 bars, multiple TVs & late hours.</p><img src="./hopsmith.jpeg">' +  
+            '<p><strong>Address: </strong><br>15 W Division St, Chicago, IL 60610<br>' + 
+            '<strong>Hours: </strong><br>Monday-Sunday 12PM-4AM<br></p>' +
+            '<p><strong>Phone: </strong>(312) 600-9816</p>' +
             '</div>',
           type: 'info'
         }, {
@@ -433,12 +465,12 @@
           description:    '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
-            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<h6 id="firstHeading" class="firstHeading">Old Town Pour House</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
-            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
-            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '<p>Upscale pub food & a massive beer list served in an elegant wood-clad space with a mezzanine.</p><img src="./oldtown.jpeg">' +  
+            '<p><strong>Address: </strong><br>1419 N Wells St, Chicago, IL 60610<br>' + 
+            '<strong>Hours: </strong><br>Monday 4PM-12AM<br>Tuesday-Wednesday 4PM-2AM<br>Thursday 4PM-2AM<br>Friday 11:30AM-2AM<br>Saturday 11:30AM-3AM<br>Sunday 11:30AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(312) 477-2800</p>' +
             '</div>',
           type: 'info'
         }, {
@@ -447,12 +479,12 @@
           description:    '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
-            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<h6 id="firstHeading" class="firstHeading">Will\'s Northwoods Inn</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
-            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
-            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '<p>Bar, patio & haven for Wisconsinites with cheese curds & other pub grub plus TVs tuned to the game.</p><img src="./northwoods inn.jpeg">' +  
+            '<p><strong>Address: </strong><br>3030 N Racine Ave, Chicago, IL 60657<br>' + 
+            '<strong>Hours: </strong><br>Monday-Friday 11AM-2AM<br>Saturday 9:30AM-3AM<br>Sunday 9:30AM-2AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 528-4400</p>' +
             '</div>',
           type: 'info'
         }, {
@@ -461,12 +493,12 @@
           description:    '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
-            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<h6 id="firstHeading" class="firstHeading">ChiTown Futbol</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
-            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
-            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '<p>NChicago´s Best Indoor Soccer FacilityPlay Now ... The ChiTown Indoor Soccer Sport Center is Chicago\'s premier indoor soccer training venue</p><img src="./chitownfutbol.jpeg">' +  
+            '<p><strong>Address: </strong><br>2343 S Throop St, Chicago, IL 60608<br>' + 
+            '<strong>Hours: </strong><br>Monday-Sunday 12AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(312) 226-1988</p>' +
             '</div>',
           type: 'info'
         }, {
@@ -475,12 +507,12 @@
           description:    '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
-            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<h6 id="firstHeading" class="firstHeading">Timothy O\'Tooole\'s</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
-            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
-            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '<p>Pub with TVs, billiards & a large menu of bar food, with daily food & drink specials.</p><img src="./timotooles.jpeg">' +  
+            '<p><strong>Address: </strong><br>622 N Fairbanks Ct, Chicago, IL 60611<br>' + 
+            '<strong>Hours: </strong><br>Sunday-Monday 11AM-3AM<br>Thursday-Saturday 11AM-4AM</p>' +
+            '<p><strong>Phone: </strong>(312) 642-0700</p>' +
             '</div>',
           type: 'info'
         }
@@ -557,46 +589,45 @@
       // Note: This example requires that you consent to location sharing when
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
+
+        // var map, infoWindow;
+        // function initMap() {
+        //   map = new google.maps.Map(document.getElementById('map'), {
+        //     zoom: 12
+        //   });
+        //   infoWindow = new google.maps.InfoWindow;
+
+        //   // Try HTML5 geolocation.
+        //   if (navigator.geolocation) {
+        //     navigator.geolocation.getCurrentPosition(function (position) {
+        //       var pos = {
+        //         lat: position.coords.latitude,
+        //         lng: position.coords.longitude
+        //       };
+
+        //       infoWindow.setPosition(pos);
+        //       infoWindow.setContent('Location found.');
+        //       infoWindow.open(map);
+        //       map.setCenter(pos);
+        //     }, function () {
+        //       handleLocationError(true, infoWindow, map.getCenter());
+        //     });
+        //   } else {
+        //     // Browser doesn't support Geolocation
+        //     handleLocationError(false, infoWindow, map.getCenter());
+        //   }
+        
+
+        // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        //   infoWindow.setPosition(pos);
+        //   infoWindow.setContent(browserHasGeolocation ?
+        //     'Error: The Geolocation service failed.' :
+        //     'Error: Your browser doesn\'t support geolocation.');
+        //   infoWindow.open(map);
+        // }
+
       // locate you.
 
-      // $("#geocode").on("click", function () {
-      //   var map, infoWindow;
-      //   function initMap() {
-      //     map = new google.maps.Map(document.getElementById('map'), {
-      //       center: { lat: -34.397, lng: 150.644 },
-      //       zoom: 6
-      //     });
-      //     infoWindow = new google.maps.InfoWindow;
-
-      //     // Try HTML5 geolocation.
-      //     if (navigator.geolocation) {
-      //       navigator.geolocation.getCurrentPosition(function (position) {
-      //         var pos = {
-      //           lat: position.coords.latitude,
-      //           lng: position.coords.longitude
-      //         };
-
-      //         infoWindow.setPosition(pos);
-      //         infoWindow.setContent('Location found.');
-      //         infoWindow.open(map);
-      //         map.setCenter(pos);
-      //       }, function () {
-      //         handleLocationError(true, infoWindow, map.getCenter());
-      //       });
-      //     } else {
-      //       // Browser doesn't support Geolocation
-      //       handleLocationError(false, infoWindow, map.getCenter());
-      //     }
-      //   }
-
-      //   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      //     infoWindow.setPosition(pos);
-      //     infoWindow.setContent(browserHasGeolocation ?
-      //       'Error: The Geolocation service failed.' :
-      //       'Error: Your browser doesn\'t support geolocation.');
-      //     infoWindow.open(map);
-      //   }
-      // });
 
 
   </script>

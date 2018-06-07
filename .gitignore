@@ -1,9 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /node_modules# Logs
 =======
 # Logs
 >>>>>>> 0002b8190dfb743a11e2e67640e389cfcba013b4
+=======
+# Logs
+>>>>>>> f8690db5354e22c753a66bdec2bfc614ea348e65
 logs
 *.log
 npm-debug.log*
@@ -47,7 +51,11 @@ typings/
 .env
 # next.js build output
 <<<<<<< HEAD
+<<<<<<< HEAD
 .next
 =======
 .next
 >>>>>>> 0002b8190dfb743a11e2e67640e389cfcba013b4
+=======
+.next
+>>>>>>> f8690db5354e22c753a66bdec2bfc614ea348e65

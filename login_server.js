@@ -36,6 +36,10 @@ app.post("/authenticate", function (req, res) {
         //     console.log({ id: result.insertId });
         // });
     res.send(req.body);
+
+    app.get("/userDashboard", function (req, res) {
+        res.sendFile(path.join(__dirname, "./userDashboard.html"));
+    });
         
 });
 

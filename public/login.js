@@ -77,7 +77,7 @@ $(document).ready(function () {
                             }
 
                             // we can go ahead and redirect to another view here using data from currentUser.
-                            console.log(currentUser);
+                            console.log('currentUser: ', currentUser);
                             console.log(data[keys[i]]);
 
                             $('#logoutButton').show();
@@ -172,7 +172,6 @@ $(document).ready(function () {
                 console.log("About to check user credentials in firebase now");
                 // Reload the page to get the updated list
                 // location.reload();
-                userDisplayName = response.username;
                 console.log("POST response: ", response);
                 console.log('We have a new user');
                 console.log("response.username", response.username);
@@ -180,14 +179,18 @@ $(document).ready(function () {
                 console.log("response.password: ", response.password);
                 database.ref().push(response);
                 $('#logoutButton').show();
-                $('#loggedInUser').text('Welcome ' + userDisplayName);
+                $('#loggedInUser').text('Welcome ' + response.username);
                 $('#loginModal').modal('hide');
                 $('#signupModal').modal('hide');
                 $('#loginModalButton').hide();
                 $('#signupModalButton').hide();
                 $('#jumbotron').removeClass('d-none');
-
-            });
+                currentUser = response;
+                console.log('currentUser: ', currentUser);
+            })
+            .then(response, function(){
+                response.redirect('/userDashboard');
+            })
 
             // $('#logoutButton').show();
             // // $('#loggedInUser').text('Welcome ' + displayName);
@@ -293,5 +296,8 @@ $(document).ready(function () {
         });
 
     });
+
+    // Routes
+    
 
 });

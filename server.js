@@ -1,9 +1,9 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var unirest = require("unirest");
 var app = express();
 var fs = require('fs');
-var java = require("./java");
+var cup = require("./java");
+var mysql = require("mysql");
 
 // Set the port of our application
 // process.env.PORT lets the port be set by Heroku
@@ -19,47 +19,35 @@ app.use(bodyParser.json());
 var Combinatorics = require('js-combinatorics');
 var getJSON = require('get-json');
 
-var cDat = java;
+var cDat = cup;
 
 
-unirest.get("https://montanaflynn-fifa-world-cup.p.mashape.com/teams")
-  .header("accepts", "json")
-  .header("X-Mashape-Key", "7tP19SkixCmsh4ClVp01P0JLPB9Np1AdZAOjsnBVuXLfgP1E8X")
-  .header("X-Mashape-Host", "montanaflynn-fifa-world-cup.p.mashape.com")
-  .end(function (result) {
-    //console.log(result.body);
-    for (var i = 0; i < result.body.length; i++) {
-      cDat.teams.forEach(function (t, index) {
-        if (t === result.body[i].title) {
-          var array = [t, result.body[i].id];
-          cDat.teams[index] = array;
-        }
-      });
-    }
-    //console.log(java.cupData.teams);
-    //respond to API call res.render etc
+console.log(cDat.groups.a.matches[0].home_team);
+console.log(cDat.groups.a.matches[0].away_team);
 
-    console.log(cDat);
-  });
+var connection = mysql.createConnection({
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "toor",
+  database: "world_cup"
+ });
+ 
+ connection.connect(function(err) {
+  if (err) {
+    console.error("error connecting: " + err.stack);
+    return;
+  }
+ 
+  console.log("connected as id " + connection.threadId);
+ });
 
-unirest.get("https://montanaflynn-fifa-world-cup.p.mashape.com/rounds")
-  .header("accepts", "json")
-  .header("X-Mashape-Key", "7tP19SkixCmsh4ClVp01P0JLPB9Np1AdZAOjsnBVuXLfgP1E8X")
-  .header("X-Mashape-Host", "montanaflynn-fifa-world-cup.p.mashape.com")
-  .end(function (result) {
-    //console.log(result.status, result.headers, result.body);
-  });
-
-unirest.get("https://montanaflynn-fifa-world-cup.p.mashape.com/games")
-  .header("accepts", "json")
-  .header("X-Mashape-Key", "7tP19SkixCmsh4ClVp01P0JLPB9Np1AdZAOjsnBVuXLfgP1E8X")
-  .header("X-Mashape-Host", "montanaflynn-fifa-world-cup.p.mashape.com")
-  .end(function (result) {
-
-    //console.log(result.status, result.headers, result.body);
-  });
-
-
+connection.query("SELECT name from world_cup.teams WHERE (id=1)", function(err, result) {
+  if (err) throw err;
+  console.log(result);
+  var name = result;
+  //res.redirect("/");
+});
 
 // Serve index.handlebars to the root route.
 // app.get("/", function(req, res){

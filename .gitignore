@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 
 /node_modules# Logs
+=======
+# Logs
+>>>>>>> 0002b8190dfb743a11e2e67640e389cfcba013b4
 logs
 *.log
 npm-debug.log*
@@ -42,4 +46,8 @@ typings/
 # dotenv environment variables file
 .env
 # next.js build output
+<<<<<<< HEAD
 .next
+=======
+.next
+>>>>>>> 0002b8190dfb743a11e2e67640e389cfcba013b4

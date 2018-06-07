@@ -186,7 +186,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <!-- <script src="./login.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
     <script type="text/javascript">
+        var firebase_config = {
+            apiKey: "AIzaSyA5y8GqPO0dVFs5xshZiFdjKgVgN9OlO0M",
+            authDomain: "world-cup-2018-2e7ca.firebaseapp.com",
+            databaseURL: "https://world-cup-2018-2e7ca.firebaseio.com",
+            projectId: "world-cup-2018-2e7ca",
+            storageBucket: "world-cup-2018-2e7ca.appspot.com",
+            messagingSenderId: "621397211278"
+        };
+
+        firebase.initializeApp(firebase_config);
+        var database = firebase.database();
+
         // Retrieve the object from storage
         var retrievedObject = localStorage.getItem('currentUser');
         console.log('retrievedObject: ', JSON.parse(retrievedObject));
@@ -194,12 +208,41 @@
         console.log('Logged in User: ', username);
         $('#user').text(username);
 
+        database.ref().once("value", function (snapshot) {
+            data = snapshot.val();
+            // console.log("DATA: ", data);
+            // console.log("==========================");
+            var keys = Object.keys(data);
+            for (var i = 0; i < keys.length; i++) {
+                // console.log("data[keys[i]].email", data[keys[i]].email);
 
-
-        $('.teamFlag').on('click', function () {
-            $('#nav-tab').removeClass('d-none');
-            $('#nav-tabContent').removeClass('d-none');
-
+                if (username === data[keys[i]].username) {
+                    
+                    console.log("found the user");
+                    console.log('[keys[i]] (unique id) : ', [keys[i]]);
+                    console.log('Here is his info: ', data[keys[i]]);
+                    data[keys[i]] = { 
+                        username: data[keys[i]].username,
+                        email: data[keys[i]].email,
+                        password: data[keys[i]].password,
+                        "hello" : 'worlddddddddd'
+                    };
+                    database.ref(keys[i]).set(data[keys[i]]);
+                    //     {
+                        
+                    //         username: data[keys[i]].username,
+                    //         email: data[keys[i]].email,
+                    //         password: data[keys[i]].password,
+                    //         hello: 'world'
+                    // }
+                
+                    $('.teamFlag').on('click', function () {
+                        $('#nav-tab').removeClass('d-none');
+                        $('#nav-tabContent').removeClass('d-none');
+                        
+                    });
+                }
+            }
         });
     </script>
 </body>

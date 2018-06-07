@@ -17,10 +17,20 @@
     "type": "git",
     "url": "git+https://github.com/Nismo-Gtr/Project-2-World-Cup.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Nismo-Gtr/Project-2-World-Cup/issues"
   },
-  "homepage": "https://github.com/Nismo-Gtr/Project-2-World-Cup#readme"
+  "homepage": "https://github.com/Nismo-Gtr/Project-2-World-Cup#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "get-json": "^1.0.0",
+    "js-combinatorics": "^0.5.3",
+    "jsonfile": "^4.0.0",
+    "mysql": "^2.15.0",
+    "unirest": "^0.5.1"
+  },
+  "devDependencies": {}
 }

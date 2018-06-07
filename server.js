@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // Dependencies
 
 var path = require("path");
@@ -15,7 +15,9 @@ var mysql = require("mysql");
 var PORT = process.env.PORT || 3000;
 
 // Use the express.static middleware to serve static content for the app from the "public" directory in the application directory.
+
 //app.use(express.static("public"));
+
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -51,6 +53,7 @@ app.post("/api/characters", function(req, res) {
 
 // Starts the server to begin listening
 // =============================================================
+
 
 var Combinatorics = require('js-combinatorics');
 var getJSON = require('get-json');

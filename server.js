@@ -9,6 +9,8 @@ var app = express();
 var fs = require('fs');
 var cup = require("./java");
 var mysql = require("mysql");
+var moment = require('moment');
+var moment = require('moment-timezone');
 
 // Set the port of our application
 // process.env.PORT lets the port be set by Heroku
@@ -63,7 +65,9 @@ var cDat = cup;
 
 console.log(cDat.groups.a.matches[0].home_team);
 console.log(cDat.groups.a.matches[0].away_team);
-
+console.log(cDat.groups.a.matches[0].date);
+var centTime0 = moment(cDat.groups.a.matches[0].date); 
+console.log(centTime0.tz('America/Chicago').format('ha z'));
 var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
@@ -83,8 +87,7 @@ var connection = mysql.createConnection({
 
 connection.query("SELECT name from world_cup.teams WHERE (id=1)", function(err, result) {
   if (err) throw err;
-  console.log(result);
-  var name = result;
+  console.log(result[0].name);
   //res.redirect("/");
 });
 

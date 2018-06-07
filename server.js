@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Dependencies
 
 var path = require("path");
@@ -65,8 +64,9 @@ var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "toor",
-  database: "world_cup"
+  password: "root",
+  database: "world_cup",
+  socketPath: "/Applications/MAMP/tmp/mysql/mysql.sock"
  });
  
  connection.connect(function(err) {

@@ -80,13 +80,13 @@ $(document).ready(function () {
                             console.log('currentUser: ', currentUser);
                             console.log(data[keys[i]]);
 
-                            $('#logoutButton').show();
-                            $('#loginModal').modal('hide');
-                            $('#signupModal').modal('hide');
-                            $('#loginModalButton').hide();
-                            $('#signupModalButton').hide();
-                            $('#jumbotron').removeClass('d-none');
-                            $('#loggedInUser').text('Welcome ' + data[keys[i]].username);
+                            // $('#logoutButton').show();
+                            // $('#loginModal').modal('hide');
+                            // $('#signupModal').modal('hide');
+                            // $('#loginModalButton').hide();
+                            // $('#signupModalButton').hide();
+                            // $('#jumbotron').removeClass('d-none');
+                            // $('#loggedInUser').text('Welcome ' + data[keys[i]].username);
                         }
                     }
                 });
@@ -187,10 +187,15 @@ $(document).ready(function () {
                 $('#jumbotron').removeClass('d-none');
                 currentUser = response;
                 console.log('currentUser: ', currentUser);
-            })
-            .then(response, function(){
-                response.redirect('/userDashboard');
-            })
+
+                // LOCAL STORAGE
+                // window.location.replace()
+            });
+            
+            
+            // .then(response, function(){
+            //     response.redirect('/userDashboard');
+            // })
 
             // $('#logoutButton').show();
             // // $('#loggedInUser').text('Welcome ' + displayName);

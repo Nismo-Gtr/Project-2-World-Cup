@@ -18,15 +18,15 @@ app.use(express.static("app/public"));
 // Routes
 // =============================================================
 
+app.use('/assets', express.static(path.join(__dirname, './public/assets')))
 
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "./public/home2.html"));
+  res.sendFile(path.join(__dirname, "./home2.html"));
 });
 
 app.get("/add", function(req, res) {
   res.sendFile(path.join(__dirname, "add.html"));
 });
-
 
 app.get("/api/characters", function(req, res) {
   return res.json(characters);

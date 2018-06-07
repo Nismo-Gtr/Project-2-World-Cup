@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 1724a77b941689b5d70b54581ebe1d701d969d87
 // Dependencies
 
 var path = require("path");

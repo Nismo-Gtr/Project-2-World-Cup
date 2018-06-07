@@ -8,7 +8,8 @@
   <title>Map</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
   <style>
     /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -25,15 +26,22 @@
       margin: 0;
       padding: 0;
     }
+
+    button {
+      z-index: 1;
+    }
   </style>
 </head>
 
 <body>
+
+
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Create Watch Party
   </button>
-
+  <div id="map">
+  </div>
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog model-lg" role="document">
@@ -47,51 +55,186 @@
         <div class="modal-body">
           <form class="needs-validation" novalidate>
             <div class="form-row">
-              <div class="col-md-4 mb-3">
+              <div class="col-md-6 mb-3">
                 <label for="validationCustom01">First name</label>
-                <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+                <input type="text" class="form-control" id="firstName" placeholder="First name" value="Mark" required>
                 <div class="valid-feedback">
                   Looks good!
                 </div>
               </div>
-              <div class="col-md-4 mb-3">
+              <div class="col-md-6 mb-3">
                 <label for="validationCustom02">Last name</label>
-                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required>
+                <input type="text" class="form-control" id="lastName" placeholder="Last name" value="Otto" required>
                 <div class="valid-feedback">
                   Looks good!
                 </div>
               </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label for="gameSchedule">Game Schedule(all times eastern)</label>
+                <!-- <input type="text" class="form-control" id="state" placeholder="State" value="IL" required> -->
+                <div class="dropdown">
+                  <select class="form-control btn btn-secondary" id="gameSchedule">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="games" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="games">
+                      <option class="dropdown-item" value="Russia v Saudi Arabia June 14, 2018 10:00am(eastern)">Russia v Saudi Arabia June 14, 2018 10:00am</option>
+                      <option class="dropdown-item" value="Egypt v Uruguay June 15, 2018 7:00am(eastern)">Egypt v Uruguay June 15, 2018 7:00am</option>
+                      <option class="dropdown-item" value="Morocco v Iran June 15, 2018 10:00am(eastern)">Morocco v Iran June 15, 2018 10:00am</option>
+                      <option class="dropdown-item" value="Portugal v Spain June 15, 2018 1:00pm(eastern)">Portugal v Spain June 15, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="France v Australia June 16, 2018 5:00am(eastern)">France v Australia June 16, 2018 5:00am</option>
+                      <option class="dropdown-item" value="Argentina v Iceland June 16, 2018 8:00am(eastern)">Argentina v Iceland June 16, 2018 8:00am</option>
+                      <option class="dropdown-item" value="Peru v Denmark June 16, 2018 11:00am(eastern)">Peru v Denmark June 16, 2018 11:00am</option>
+                      <option class="dropdown-item" value="Croatia v Nigeria June 16, 2018 2:00pm(eastern)">Croatia v Nigeria June 16, 2018 2:00pm</option>
+                      <option class="dropdown-item" value="Costa Rica v Serbia June 17, 2018 7:00am(eastern)">Costa Rica v Serbia June 17, 2018 7:00am</option>
+                      <option class="dropdown-item" value="Germany v Mexico June 17, 2018 10:00am(eastern)">Germany v Mexico June 17, 2018 10:00am</option>
+                      <option class="dropdown-item" value="Brazil v Switzerland June 17, 2018 2:00pm(eastern)">Brazil v Switzerland June 17, 2018 2:00pm</option>
+                      <option class="dropdown-item" value="Sweden v Korea Republic June 18, 2018 7:00am(eastern)">Sweden v Korea Republic June 18, 2018 7:00am</option>
+                      <option class="dropdown-item" value="Belgium v Panama June 18, 2018 10:00am(eastern)">Belgium v Panama June 18, 2018 10:00am</option>
+                      <option class="dropdown-item" value="Tunisia v England June 18, 2018 1:00pm(eastern)">Tunisia v England June 18, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="Columbia v Japan June 19, 2018 7:00am(eastern)">Columbia v Japan June 19, 2018 7:00am</option>
+                      <option class="dropdown-item" value="Poland v Senegal June 19, 2018 10:00am(eastern)">Poland v Senegal June 19, 2018 10:00am</option>
+                      <option class="dropdown-item" value="Russia v Egypt June 19, 2018 1:00pm(eastern)">Russia v Egypt June 19, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="Portugal v Morocco June 20, 2018 7:00am(eastern)">Portugal v Morocco June 20, 2018 7:00am</option>
+                      <option class="dropdown-item" value="Uruguay v Saudi Arabia June 20, 2018 10:00am(eastern)">Uruguay v Saudi Arabia June 20, 2018 10:00am</option>
+                      <option class="dropdown-item" value="Iran v Spain June 20, 2018 1:00pm(eastern)">Iran v Spain June 20, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="Denmark v Australia June 21, 2018 7:00am(eastern)">Denmark v Australia June 21, 2018 7:00am</option>
+                      <option class="dropdown-item" value="France v Peru June 21, 2018 10:00am(eastern)">France v Peru June 21, 2018 10:00am</option>
+                      <option class="dropdown-item" value="Argentina v Croatia June 21, 2018 1:00pm(eastern)">Argentina v Croatia June 21, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="Brazil v Costa Rica June 22, 2018 7:00am(eastern)">Brazil v Costa Rica June 22, 2018 7:00am</option>
+                      <option class="dropdown-item" value="Nigeria v Iceland June 22, 2018 10:00am(eastern)">Nigeria v Iceland June 22, 2018 10:00am</option>
+                      <option class="dropdown-item" value="Serbia v Switzerland June 22, 2018 1:00pm(eastern)">Serbia v Switzerland June 22, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="Belgium v Tunisia June 23, 2018 7:00am(eastern)">Belgium v Tunisia June 23, 2018 7:00am</option>
+                      <option class="dropdown-item" value="Korea Republic v Mexico June 23, 2018 10:00am(eastern)">Korea Republic v Mexico June 23, 2018 10:00am</option>
+                      <option class="dropdown-item" value="Germany v Sweden June 23, 2018 1:00pm(eastern)">Germany v Sweden June 23, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="England v Panama June 24, 2018 7:00am(eastern)">England v Panama June 24, 2018 7:00am</option>
+                      <option class="dropdown-item" value="Japan v Senegal June 24, 2018 10:00am(eastern)">Japan v Senegal June 24, 2018 10:00am</option>
+                      <option class="dropdown-item" value="Poland v Colombia June 24, 2018 1:00pm(eastern)">Poland v Colombia June 24, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="Uruguay v Russia June 25, 2018 9:00am(eastern)">Uruguay v Russia June 25, 2018 9:00am</option>
+                      <option class="dropdown-item" value="Saudi Arabia v Egypt June 25, 2018 9:00am(eastern)">Saudi Arabia v Egypt June 25, 2018 9:00am</option>
+                      <option class="dropdown-item" value="Spain v Morocco June 25, 2018 1:00pm(eastern)">Spain v Morocco June 25, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="Iran v Portugal June 25, 2018 1:00pm(eastern)">Iran v Portugal June 25, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="Australia v Peru June 26, 2018 9:00am(eastern)">Australia v Peru June 26, 2018 9:00am</option>
+                      <option class="dropdown-item" value="Denmark v France June 26, 2018 9:00am(eastern)">Denmark v France June 26, 2018 9:00am</option>
+                      <option class="dropdown-item" value="Nigeria v Argentina June 26, 2018 1:00pm(eastern)">Nigeria v Argentina June 26, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="Iceland v Croatia June 26, 2018 1:00pm(eastern)">Iceland v Croatia June 26, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="Korea Republic v Germany June 27, 2018 9:00am(eastern)">Korea Republic v Germany June 27, 2018 9:00am</option>
+                      <option class="dropdown-item" value="Mexico v Sweden June 27, 2018 9:00am(eastern)">Mexico v Sweden June 27, 2018 9:00am</option>
+                      <option class="dropdown-item" value="Serbia v Brazil June 27, 2018 1:00pm(eastern)">Serbia v Brazil June 27, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="Switzerland v Costa Rica June 27, 2018 1:00pm(eastern)">Switzerland v Costa Rica June 27, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="Japan v Poland June 28, 2018 9:00am(eastern)">Japan v Poland June 28, 2018 9:00am</option>
+                      <option class="dropdown-item" value="Senegal v Colombia June 28, 2018 9:00am(eastern)">Senegal v Colombia June 28, 2018 9:00am</option>
+                      <option class="dropdown-item" value="Panama v Tunisia June 28, 2018 1:00pm(eastern)">Panama v Tunisia June 28, 2018 1:00pm</option>
+                      <option class="dropdown-item" value="England v Belgium June 28, 2018 1:00pm(eastern)">England v Belgium June 28, 2018 1:00pm</option>
+                    </div>
+                  </select>
+                </div>
+                <div class="invalid-feedback">
+                  Please provide a valid state.
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-row">
               <div class="col-md-4 mb-3">
-                <label for="validationCustomUsername">Max Atendees</label>
+                <label for="attendees">Max Atendees</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" id="validationCustomUsername" placeholder="" aria-describedby="inputGroupPrepend"
-                    required>
+                  <input type="text" class="form-control" id="attendees" value="20" required>
                   <div class="invalid-feedback">
-                    Please choose a username.
+                    Please set maximum number of attendees
                   </div>
                 </div>
               </div>
             </div>
             <div class="form-row">
-              <div class="col-md-6 mb-3">
-                <label for="validationCustom03">City</label>
-                <input type="text" class="form-control" id="address" placeholder="City" value="191 Timber Oaks Drive, North Aurora, IL" required>
+              <div class="col-md-12 mb-3">
+                <label for="streetAddress">Street Address</label>
+                <input type="text" class="form-control" id="streetAddress" placeholder="Last name" value="191 Timber Oaks Drive" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" placeholder="City" value="North Aurora" required>
                 <div class="invalid-feedback">
                   Please provide a valid city.
                 </div>
               </div>
-              <div class="col-md-3 mb-3">
-                <label for="validationCustom04">State</label>
-                <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
+            </div>
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label for="state">State</label>
+                <!-- <input type="text" class="form-control" id="state" placeholder="State" value="IL" required> -->
+                <div class="dropdown">
+                  <select class="form-control btn btn-secondary" id="stateList">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="state" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="state">
+                      <option class="dropdown-item" value="Alabama">Alabama</option>
+                      <option class="dropdown-item" value="Alaska">Alaska</option>
+                      <option class="dropdown-item" value="Arizona">Arizona</option>
+                      <option class="dropdown-item" value="Arkansas">Arkansas</option>
+                      <option class="dropdown-item" value="California">California</option>
+                      <option class="dropdown-item" value="Colorado">Colorado</option>
+                      <option class="dropdown-item" value="Connecticut">Connecticut</option>
+                      <option class="dropdown-item" value="Delaware">Delaware</option>
+                      <option class="dropdown-item" value="District of Columbia">District of Columbia</option>
+                      <option class="dropdown-item" value="Florida">Florida</option>
+                      <option class="dropdown-item" value="Georgia">Georgia</option>
+                      <option class="dropdown-item" value="Guam">Guam</option>
+                      <option class="dropdown-item" value="Hawaii">Hawaii</option>
+                      <option class="dropdown-item" value="Idaho">Idaho</option>
+                      <option class="dropdown-item" value="Illinois">Illinois</option>
+                      <option class="dropdown-item" value="Indiana">Indiana</option>
+                      <option class="dropdown-item" value="Iowa">Iowa</option>
+                      <option class="dropdown-item" value="Kansas">Kansas</option>
+                      <option class="dropdown-item" value="Kentucky">Kentucky</option>
+                      <option class="dropdown-item" value="Louisiana">Louisiana</option>
+                      <option class="dropdown-item" value="Maine">Maine</option>
+                      <option class="dropdown-item" value="Maryland">Maryland</option>
+                      <option class="dropdown-item" value="Massachusetts">Massachusetts</option>
+                      <option class="dropdown-item" value="Michigan">Michigan</option>
+                      <option class="dropdown-item" value="Minnesota">Minnesota</option>
+                      <option class="dropdown-item" value="Mississippi">Mississippi</option>
+                      <option class="dropdown-item" value="Missouri">Missouri</option>
+                      <option class="dropdown-item" value="Montana">Montana</option>
+                      <option class="dropdown-item" value="Nebraska">Nebraska</option>
+                      <option class="dropdown-item" value="Nevada">Nevada</option>
+                      <option class="dropdown-item" value="New Hampshire">New Hampshire</option>
+                      <option class="dropdown-item" value="New Jersey">New Jersey</option>
+                      <option class="dropdown-item" value="New Mexico">New Mexico</option>
+                      <option class="dropdown-item" value="New York">New York</option>
+                      <option class="dropdown-item" value="North Carolina">North Carolina</option>
+                      <option class="dropdown-item" value="North Dakota">North Dakota</option>
+                      <option class="dropdown-item" value="Northern Marianas Islands">Northern Marianas Islands</option>
+                      <option class="dropdown-item" value="Ohio">Ohio</option>
+                      <option class="dropdown-item" value="Oklahoma">Oklahoma</option>
+                      <option class="dropdown-item" value="Oregon">Oregon</option>
+                      <option class="dropdown-item" value="Pennsylvania">Pennsylvania</option>
+                      <option class="dropdown-item" value="Puerto Rico">Puerto Rico</option>
+                      <option class="dropdown-item" value="Rhode Island">Rhode Island</option>
+                      <option class="dropdown-item" value="South Carolina">South Carolina</option>
+                      <option class="dropdown-item" value="South Dakota">South Dakota</option>
+                      <option class="dropdown-item" value="Tennessee">Tennessee</option>
+                      <option class="dropdown-item" value="Texas">Texas</option>
+                      <option class="dropdown-item" value="Utah">Utah</option>
+                      <option class="dropdown-item" value="Vermont">Vermont</option>
+                      <option class="dropdown-item" value="Virginia">Virginia</option>
+                      <option class="dropdown-item" value="Virgin Islands">Virgin Islands</option>
+                      <option class="dropdown-item" value="Washington">Washington</option>
+                      <option class="dropdown-item" value="West Virginia">West Virginia</option>
+                      <option class="dropdown-item" value="Wisconsin">Wisconsin</option>
+                      <option class="dropdown-item" value="Wyoming">Wyoming</option>
+                    </div>
+                  </select>
+                </div>
                 <div class="invalid-feedback">
                   Please provide a valid state.
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <label for="validationCustom05">Zip</label>
-                <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
-                <div class="invalid-feedback">
-                  Please provide a valid zip.
                 </div>
               </div>
             </div>
@@ -101,23 +244,17 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button class="btn btn-primary" type="submit" id="submit" data-dismiss="modal">Submit form</button>
-
         </div>
       </div>
     </div>
   </div>
-  <!-- <div id="floating-panel">
-      <input id="address" type="textbox" value="Sydney, NSW">
-      <input id="submit" type="button" value="Geocode">
-    </div> -->
-  <div id="map">
-        <div id="map"></div>
-  </div>
+
   <script>
 
-    $('#exampleModal').on('shown.bs.modal', function () {
-      $('#myInput').trigger('focus')
-    })
+        $('#exampleModal').on('shown.bs.modal', function () {
+          $('#myInput').trigger('focus')
+        })
+
 
     var map;
     function initMap() {
@@ -129,12 +266,6 @@
 
       var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
       var icons = {
-        parking: {
-          icon: iconBase + 'parking_lot_maps.png'
-        },
-        library: {
-          icon: iconBase + 'library_maps.png'
-        },
         info: {
           icon: './soccer-game (1).png'
         }
@@ -144,97 +275,213 @@
         {
           name: 'The Globe Pub',
           position: new google.maps.LatLng(41.9546, -87.6777),
-          description: 
-      '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-      '<div id="bodyContent">'+
-      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-      'sandstone rock formation in the southern part of the '+
-      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-      'south west of the nearest large town, Alice Springs; 450&#160;km '+
-      '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-      'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-      'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-      'Aboriginal people of the area. It has many springs, waterholes, '+
-      'rock caves and ancient paintings. Uluru is listed as a World '+
-      'Heritage Site.</p>'+
-      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-      '(last visited June 22, 2009).</p>'+
-      '</div>'+
-      '</div>',
+          description:
+            '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(312) 836-0066</p>' +
+            '</div>',
           type: 'info'
         }, {
           name: "Fado's Irish Pub",
           position: new google.maps.LatLng(41.8919, -87.6313),
-          description: "<div>Fado's Irish Pub</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">Fado\'s Irish Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>A traditional Irish atmosphere, with Guinness, whiskey & pub food faves, plus European soccer on TV.</p><img src="./Fados.jpg">' +  
+            '<p><strong>Address: </strong><br>100 W Grand Ave, Chicago, IL 60654<br>' + 
+            '<strong>Hours: </strong><br>Monday-Friday 11:30AM-2AM<br>Saturday 7:30AM-3AM<br>Sunday 7:30AM-2AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }, {
-          name:  "Cleo's Bar and Grill",
+          name: "Cleo's Bar and Grill",
           position: new google.maps.LatLng(41.8959, -87.6759),
-          description: "<div>Cleo's Bar and Grill</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">Cleo\'s Bar and Grill</h6>' +
+            '<div id="bodyContent">' + 
+            '<p>Neighborhood bar & grill offering craft beers, classic pub grub served late & soccer on TV.</p>' +  '<div><img src="./Cleo\'s.jpg"></div>' +
+            '<p><strong>Address: </strong><br>1935 W Chicago Ave, Chicago, IL 60622<br>' + 
+            '<strong>Hours: </strong><br>Monday-Friday 12PM-4AM<br>Saturday 10AM-12AM<br>Sunday 10:30AM-4AM<br></p>' +
+            '<p><strong>Phone: </strong>(312) 243-5600</p>' +
+            '</div>',
           type: 'info'
         }, {
           name: "Theory",
           position: new google.maps.LatLng(41.8901, -87.6285),
-          description: "<div>Theory</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }, {
           name: "The Scout Waterhouse + Kitchen",
           position: new google.maps.LatLng(41.8659, -87.6255),
-          description: "<div>The Scout Waterhouse + Kitchen</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }, {
           name: "Lincoln Park South Fields",
           position: new google.maps.LatLng(41.9141, -87.6290),
-          description: "<div>Lincoln Park South Fields</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }, {
           name: "AJ Hudson's Public House",
           position: new google.maps.LatLng(41.9509, -87.6686),
-          description: "<div>AJ Hudson's Public House</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }, {
           name: "Chicago Fire Soccer Dome",
           position: new google.maps.LatLng(41.9478, -87.6954),
-          description: "<div>Chicago Fire Soccer Dome</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }, {
           name: "Mckinley Park",
           position: new google.maps.LatLng(41.8239, -87.6824),
-          description: "<div>Mckinley Park</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }, {
           name: "Hawthorne Soccer Field",
           position: new google.maps.LatLng(41.8340, -87.7620),
-          description: "<div>Hawthorne Soccer Field</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }, {
-          name: "Hopsmith Tavern", 
+          name: "Hopsmith Tavern",
           position: new google.maps.LatLng(41.9040, -87.6293),
-          description: "<div>Hopsmith Tavern</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }, {
           name: "Old Town Pour House",
           position: new google.maps.LatLng(41.9395, -87.6358),
-          description: "<div>Old Town Pour House</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }, {
           name: "Will's Northwoods Inn",
           position: new google.maps.LatLng(41.9375, -87.6589),
-          description: "<div>Will's Northwoods Inn</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }, {
           name: "ChiTown Futbol",
           position: new google.maps.LatLng(41.8497, -87.6579),
-          description: "<div>ChiTown Futbol</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }, {
           name: "Timothy O'Toole's",
           position: new google.maps.LatLng(41.8935, -87.6204),
-          description: "<div>Timothy O'Toole's</div>",
+          description:    '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
+            '<div id="bodyContent">' +
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p>' +  
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
+            '<p><strong>Phone: </strong>(773) 871-3757</p>' +
+            '</div>',
           type: 'info'
         }
       ];
@@ -250,11 +497,11 @@
           map: map,
         });
 
-  marker.addListener('click', function() {
-    infowindow.open(map, marker);
-  });
+        marker.addListener('click', function () {
+          infowindow.open(map, marker);
+        });
       });
-     
+
       // Example starter JavaScript for disabling form submissions if there are invalid fields
       (function () {
         'use strict';
@@ -273,150 +520,85 @@
           });
         }, false);
       })();
-      
+
       // This allows creating of new marker
       var geocoder = new google.maps.Geocoder();
 
-        document.getElementById('submit').addEventListener('click', function() {
-          geocodeAddress(geocoder, map);
-        });
-      }
-
-      function geocodeAddress(geocoder, resultsMap) {
-        var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location,
-              icon: './soccer-game (1).png'
-            });
-            console.log(results);
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-
-
+      document.getElementById('submit').addEventListener('click', function () {
+        geocodeAddress(geocoder, map);
+      });
     }
+
+
+    function geocodeAddress(geocoder, resultsMap) {
+
+      var address = $("#streetAddress").val() + ", " + $("#city").val() + ", " + $("#stateList").val()
+      geocoder.geocode({ 'address': address }, function (results, status) {
+        var infowindow = new google.maps.InfoWindow({
+          content: "contentString"
+        });
+        if (status === 'OK') {
+          resultsMap.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+            map: resultsMap,
+            position: results[0].geometry.location,
+            icon: './soccer-game (1).png'
+          });
+          var infowindow = new google.maps.InfoWindow({ content: "<h4>" + $("#firstName").val() + " " + $("#lastName").val() + "</h4><br>" + $("#gameSchedule").val() + "<br>" + "Max Attendence: " + $("#attendees").val() + "<br>" + address });
+          marker.addListener('click', function () {
+            infowindow.open(map, marker);
+          });
+          console.log(results);
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    };
       // Note: This example requires that you consent to location sharing when
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
       // locate you.
 
-      // var map, infoWindow;
-      // function initMap() {
-      //   map = new google.maps.Map(document.getElementById('map'), {
-      //     center: {lat: 41.8781, lng: -87.6298},
-      //     zoom: 11
-      //   });
-      //   infoWindow = new google.maps.InfoWindow;
-
-      var map, infoWindow;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 11
-        });
-      
-
-        var icons = {
-            watchParty: {
-                name: "Viewing Party",
-                icon: "icon image address goes here"
-            },
-
-            placesToWatch: {
-                name: "Places to Watch",
-                icon: "icon image address goes here"
-            }
-        };
-
-        
-        var features = [
-          {
-            position: new google.maps.LatLng(-33.91721, 151.22630),
-            type: 'Viewing Party'
-          }, {
-            position: new google.maps.LatLng(-33.91539, 151.22820),
-            type: 'Places to Watch'
-          }
-      ]
-
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent("You're Here!");
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
-
-
-      //   var icons = {
-      //       watchParty: {
-      //           name: "Viewing Party",
-      //           icon: "icon image address goes here"
-      //       },
-
-      //       placesToWatch: {
-      //           name: "Places to Watch",
-      //           icon: "icon image address goes here"
-      //       }
-      //   };
-
-
-      //   var features = [
-      //     {
-      //       position: new google.maps.LatLng(-33.91721, 151.22630),
-      //       type: 'Viewing Party'
-      //     }, {
-      //       position: new google.maps.LatLng(-33.91539, 151.22820),
-      //       type: 'Places to Watch'
-      //     }
-      // ]
-
-      //   // Try HTML5 geolocation.
-      //   if (navigator.geolocation) {
-      //     navigator.geolocation.getCurrentPosition(function(position) {
-      //       var pos = {
-      //         lat: position.coords.latitude,
-      //         lng: position.coords.longitude
-      //       };
-
-      //       infoWindow.setPosition(pos);
-      //       infoWindow.setContent("You're Here!");
-      //       infoWindow.open(map);
-      //       map.setCenter(pos);
-      //     }, function() {
-      //       handleLocationError(true, infoWindow, map.getCenter());
+      // $("#geocode").on("click", function () {
+      //   var map, infoWindow;
+      //   function initMap() {
+      //     map = new google.maps.Map(document.getElementById('map'), {
+      //       center: { lat: -34.397, lng: 150.644 },
+      //       zoom: 6
       //     });
-      //   } else {
-      //     // Browser doesn't support Geolocation
-      //     handleLocationError(false, infoWindow, map.getCenter());
-      //   }
-      // }
+      //     infoWindow = new google.maps.InfoWindow;
 
-      // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      //   infoWindow.setPosition(pos);
-      //   infoWindow.setContent(browserHasGeolocation ?
-      //                         'Error: The Geolocation service failed.' :
-      //                         'Error: Your browser doesn\'t support geolocation.');
-      //   infoWindow.open(map);
-      // }
+      //     // Try HTML5 geolocation.
+      //     if (navigator.geolocation) {
+      //       navigator.geolocation.getCurrentPosition(function (position) {
+      //         var pos = {
+      //           lat: position.coords.latitude,
+      //           lng: position.coords.longitude
+      //         };
+
+      //         infoWindow.setPosition(pos);
+      //         infoWindow.setContent('Location found.');
+      //         infoWindow.open(map);
+      //         map.setCenter(pos);
+      //       }, function () {
+      //         handleLocationError(true, infoWindow, map.getCenter());
+      //       });
+      //     } else {
+      //       // Browser doesn't support Geolocation
+      //       handleLocationError(false, infoWindow, map.getCenter());
+      //     }
+      //   }
+
+      //   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      //     infoWindow.setPosition(pos);
+      //     infoWindow.setContent(browserHasGeolocation ?
+      //       'Error: The Geolocation service failed.' :
+      //       'Error: Your browser doesn\'t support geolocation.');
+      //     infoWindow.open(map);
+      //   }
+      // });
+
+
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwBYAaZOV6J4PXhuaCD-IZ6OMxEopoNLU&callback=initMap">
   </script>

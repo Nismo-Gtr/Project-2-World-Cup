@@ -188,11 +188,20 @@ $(document).ready(function () {
                 currentUser = response;
                 console.log('currentUser: ', currentUser);
 
-                // LOCAL STORAGE
-                // window.location.replace()
+                
+                console.log('stringify:', JSON.stringify(currentUser));
+                // Put the object into local storage
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                console.log('localstorage: ', localStorage);
+                if(localStorage.currentUser) {
+                    console.log('localStorige :', localStorage);
+                }
+                
+                window.location.replace('/userDashboard');
+                
             });
-            
-            
+
+
             // .then(response, function(){
             //     response.redirect('/userDashboard');
             // })
@@ -303,6 +312,6 @@ $(document).ready(function () {
     });
 
     // Routes
-    
+
 
 });

@@ -1,6 +1,5 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var unirest = require("unirest");
 var app = express();
 var fs = require('fs');
 var java = require("./java");
@@ -22,44 +21,7 @@ var getJSON = require('get-json');
 var cDat = java;
 
 
-unirest.get("https://montanaflynn-fifa-world-cup.p.mashape.com/teams")
-  .header("accepts", "json")
-  .header("X-Mashape-Key", "7tP19SkixCmsh4ClVp01P0JLPB9Np1AdZAOjsnBVuXLfgP1E8X")
-  .header("X-Mashape-Host", "montanaflynn-fifa-world-cup.p.mashape.com")
-  .end(function (result) {
-    //console.log(result.body);
-    for (var i = 0; i < result.body.length; i++) {
-      cDat.teams.forEach(function (t, index) {
-        if (t === result.body[i].title) {
-          var array = [t, result.body[i].id];
-          cDat.teams[index] = array;
-        }
-      });
-    }
-    //console.log(java.cupData.teams);
-    //respond to API call res.render etc
-
-    console.log(cDat);
-  });
-
-unirest.get("https://montanaflynn-fifa-world-cup.p.mashape.com/rounds")
-  .header("accepts", "json")
-  .header("X-Mashape-Key", "7tP19SkixCmsh4ClVp01P0JLPB9Np1AdZAOjsnBVuXLfgP1E8X")
-  .header("X-Mashape-Host", "montanaflynn-fifa-world-cup.p.mashape.com")
-  .end(function (result) {
-    //console.log(result.status, result.headers, result.body);
-  });
-
-unirest.get("https://montanaflynn-fifa-world-cup.p.mashape.com/games")
-  .header("accepts", "json")
-  .header("X-Mashape-Key", "7tP19SkixCmsh4ClVp01P0JLPB9Np1AdZAOjsnBVuXLfgP1E8X")
-  .header("X-Mashape-Host", "montanaflynn-fifa-world-cup.p.mashape.com")
-  .end(function (result) {
-
-    //console.log(result.status, result.headers, result.body);
-  });
-
-
+console.log(cDat);
 
 // Serve index.handlebars to the root route.
 // app.get("/", function(req, res){

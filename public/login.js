@@ -58,7 +58,7 @@ $(document).ready(function () {
                 console.log("About to check user credentials in firebase now");
                 // Reload the page to get the updated list
                 // location.reload();
-                // console.log("POST response: ", response);
+                console.log("POST response: ", response);
                 // console.log("response.email: ", response.email);
                 // console.log("response.password: ", response.password);
 
@@ -134,13 +134,21 @@ $(document).ready(function () {
                 console.log("response.email: ", response.email);
                 console.log("response.password: ", response.password);
                 database.ref().push(response);
-                $('#logoutButton').show();
-                $('#loggedInUser').text('Welcome ' + userDisplayName);
-                $('#loginModal').modal('hide');
-                $('#signupModal').modal('hide');
-                $('#loginModalButton').hide();
-                $('#signupModalButton').hide();
-                $('#jumbotron').removeClass('d-none');
+                // $('#logoutButton').show();
+                // $('#loggedInUser').text('Welcome ' + userDisplayName);
+                // $('#loginModal').modal('hide');
+                // $('#signupModal').modal('hide');
+                // $('#loginModalButton').hide();
+                // $('#signupModalButton').hide();
+                // $('#jumbotron').removeClass('d-none');
+                // Put the object into local storage
+                localStorage.setItem('currentUser', JSON.stringify(userCredentials));
+                console.log('localstorage: ', localStorage);
+                if(localStorage.currentUser) {
+                    console.log('currentUser in localStorage :', localStorage);
+                }
+                
+                window.location.replace('/userDashboard');
 
             });
         }

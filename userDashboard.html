@@ -13,192 +13,202 @@
 <body>
     <!-- Navbar with World Cup 2018 on the left & 'Welcome + Username', Update Preferences Button and Logout Button/Tab on the right -->
     <!-- <nav class="navbar navbar-light bg-light justify-content-between"> -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">WORLD CUP 2018</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <span class="navbar-text">
+    <header>
+        <nav class="navbar navbar-expand-lg" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="home2.html">FIFA WORLD CUP 2018</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">BRACKETS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">MEET UPS</a>
+                        </li>
+                        <li class="nav-item active">
+                            <!-- Button to Open the Modal -->
+                            <a class="nav-link" href='#' data-toggle="modal" data-target="#myModal">
+                                UPDATE PREFERENCES
+                            </a>
 
-            </span>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <!-- Button to Open the Modal -->
-                    <a class="nav-link" href='#' data-toggle="modal" data-target="#myModal">| Update Preferences |
-                        <span class="sr-only">(current)</span>
-                    </a>
+                            <!-- The Modal -->
+                            <div class="modal" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
 
-                    <!-- The Modal -->
-                    <div class="modal" id="myModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">User Preferences</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
 
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h4 class="modal-title">User Preferences</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h6>Choose upto 3 teams to follow</h6>
-                                                </div>
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h6>Choose upto 3 teams to follow</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row options">
+                                                        <div class="col-md-4">
+                                                            <select class="custom-select" id="inputGroupSelect01">
+                                                                <option selected>Choose...</option>
+                                                                <option value="1">Russia</option>
+                                                                <option value="2">Saudi Arabia</option>
+                                                                <option value="3">Egypt</option>
+                                                                <option value="4">Uruguay</option>
+                                                                <option value="5">Portugal</option>
+                                                                <option value="6">Spain</option>
+                                                                <option value="7">Morocco</option>
+                                                                <option value="8">Iran</option>
+                                                                <option value="9">France</option>
+                                                                <option value="10">Australia</option>
+                                                                <option value="11">Peru</option>
+                                                                <option value="12">Denmark</option>
+                                                                <option value="13">Argentina</option>
+                                                                <option value="14">Iceland</option>
+                                                                <option value="15">Croatia</option>
+                                                                <option value="16">Nigeria</option>
+                                                                <option value="17">Brazil</option>
+                                                                <option value="18">Switzerland</option>
+                                                                <option value="19">Costa Rica</option>
+                                                                <option value="20">Serbia</option>
+                                                                <option value="21">Germany</option>
+                                                                <option value="22">Mexico</option>
+                                                                <option value="23">Sweden</option>
+                                                                <option value="24">South Korea</option>
+                                                                <option value="25">Belgium</option>
+                                                                <option value="26">Panama</option>
+                                                                <option value="27">Tunisia</option>
+                                                                <option value="28">England</option>
+                                                                <option value="29">Poland</option>
+                                                                <option value="30">Senegal</option>
+                                                                <option value="31">Columbia</option>
+                                                                <option value="32">Japan</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select class="custom-select" id="inputGroupSelect02">
+                                                                <option selected>Choose...</option>
+                                                                <option value="1">Russia</option>
+                                                                <option value="2">Saudi Arabia</option>
+                                                                <option value="3">Egypt</option>
+                                                                <option value="4">Uruguay</option>
+                                                                <option value="5">Portugal</option>
+                                                                <option value="6">Spain</option>
+                                                                <option value="7">Morocco</option>
+                                                                <option value="8">Iran</option>
+                                                                <option value="9">France</option>
+                                                                <option value="10">Australia</option>
+                                                                <option value="11">Peru</option>
+                                                                <option value="12">Denmark</option>
+                                                                <option value="13">Argentina</option>
+                                                                <option value="14">Iceland</option>
+                                                                <option value="15">Croatia</option>
+                                                                <option value="16">Nigeria</option>
+                                                                <option value="17">Brazil</option>
+                                                                <option value="18">Switzerland</option>
+                                                                <option value="19">Costa Rica</option>
+                                                                <option value="20">Serbia</option>
+                                                                <option value="21">Germany</option>
+                                                                <option value="22">Mexico</option>
+                                                                <option value="23">Sweden</option>
+                                                                <option value="24">South Korea</option>
+                                                                <option value="25">Belgium</option>
+                                                                <option value="26">Panama</option>
+                                                                <option value="27">Tunisia</option>
+                                                                <option value="28">England</option>
+                                                                <option value="29">Poland</option>
+                                                                <option value="30">Senegal</option>
+                                                                <option value="31">Columbia</option>
+                                                                <option value="32">Japan</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select class="custom-select" id="inputGroupSelect03">
+                                                                <option selected>Choose...</option>
+                                                                <option value="1">Russia</option>
+                                                                <option value="2">Saudi Arabia</option>
+                                                                <option value="3">Egypt</option>
+                                                                <option value="4">Uruguay</option>
+                                                                <option value="5">Portugal</option>
+                                                                <option value="6">Spain</option>
+                                                                <option value="7">Morocco</option>
+                                                                <option value="8">Iran</option>
+                                                                <option value="9">France</option>
+                                                                <option value="10">Australia</option>
+                                                                <option value="11">Peru</option>
+                                                                <option value="12">Denmark</option>
+                                                                <option value="13">Argentina</option>
+                                                                <option value="14">Iceland</option>
+                                                                <option value="15">Croatia</option>
+                                                                <option value="16">Nigeria</option>
+                                                                <option value="17">Brazil</option>
+                                                                <option value="18">Switzerland</option>
+                                                                <option value="19">Costa Rica</option>
+                                                                <option value="20">Serbia</option>
+                                                                <option value="21">Germany</option>
+                                                                <option value="22">Mexico</option>
+                                                                <option value="23">Sweden</option>
+                                                                <option value="24">South Korea</option>
+                                                                <option value="25">Belgium</option>
+                                                                <option value="26">Panama</option>
+                                                                <option value="27">Tunisia</option>
+                                                                <option value="28">England</option>
+                                                                <option value="29">Poland</option>
+                                                                <option value="30">Senegal</option>
+                                                                <option value="31">Columbia</option>
+                                                                <option value="32">Japan</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                            </form>
                                             </div>
-                                            <div class="row options">
-                                                <div class="col-md-4">
-                                                    <select class="custom-select" id="inputGroupSelect01">
-                                                        <option selected>Choose...</option>
-                                                        <option value="1">Russia</option>
-                                                        <option value="2">Saudi Arabia</option>
-                                                        <option value="3">Egypt</option>
-                                                        <option value="4">Uruguay</option>
-                                                        <option value="5">Portugal</option>
-                                                        <option value="6">Spain</option>
-                                                        <option value="7">Morocco</option>
-                                                        <option value="8">Iran</option>
-                                                        <option value="9">France</option>
-                                                        <option value="10">Australia</option>
-                                                        <option value="11">Peru</option>
-                                                        <option value="12">Denmark</option>
-                                                        <option value="13">Argentina</option>
-                                                        <option value="14">Iceland</option>
-                                                        <option value="15">Croatia</option>
-                                                        <option value="16">Nigeria</option>
-                                                        <option value="17">Brazil</option>
-                                                        <option value="18">Switzerland</option>
-                                                        <option value="19">Costa Rica</option>
-                                                        <option value="20">Serbia</option>
-                                                        <option value="21">Germany</option>
-                                                        <option value="22">Mexico</option>
-                                                        <option value="23">Sweden</option>
-                                                        <option value="24">South Korea</option>
-                                                        <option value="25">Belgium</option>
-                                                        <option value="26">Panama</option>
-                                                        <option value="27">Tunisia</option>
-                                                        <option value="28">England</option>
-                                                        <option value="29">Poland</option>
-                                                        <option value="30">Senegal</option>
-                                                        <option value="31">Columbia</option>
-                                                        <option value="32">Japan</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <select class="custom-select" id="inputGroupSelect02">
-                                                        <option selected>Choose...</option>
-                                                        <option value="1">Russia</option>
-                                                        <option value="2">Saudi Arabia</option>
-                                                        <option value="3">Egypt</option>
-                                                        <option value="4">Uruguay</option>
-                                                        <option value="5">Portugal</option>
-                                                        <option value="6">Spain</option>
-                                                        <option value="7">Morocco</option>
-                                                        <option value="8">Iran</option>
-                                                        <option value="9">France</option>
-                                                        <option value="10">Australia</option>
-                                                        <option value="11">Peru</option>
-                                                        <option value="12">Denmark</option>
-                                                        <option value="13">Argentina</option>
-                                                        <option value="14">Iceland</option>
-                                                        <option value="15">Croatia</option>
-                                                        <option value="16">Nigeria</option>
-                                                        <option value="17">Brazil</option>
-                                                        <option value="18">Switzerland</option>
-                                                        <option value="19">Costa Rica</option>
-                                                        <option value="20">Serbia</option>
-                                                        <option value="21">Germany</option>
-                                                        <option value="22">Mexico</option>
-                                                        <option value="23">Sweden</option>
-                                                        <option value="24">South Korea</option>
-                                                        <option value="25">Belgium</option>
-                                                        <option value="26">Panama</option>
-                                                        <option value="27">Tunisia</option>
-                                                        <option value="28">England</option>
-                                                        <option value="29">Poland</option>
-                                                        <option value="30">Senegal</option>
-                                                        <option value="31">Columbia</option>
-                                                        <option value="32">Japan</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <select class="custom-select" id="inputGroupSelect03">
-                                                        <option selected>Choose...</option>
-                                                        <option value="1">Russia</option>
-                                                        <option value="2">Saudi Arabia</option>
-                                                        <option value="3">Egypt</option>
-                                                        <option value="4">Uruguay</option>
-                                                        <option value="5">Portugal</option>
-                                                        <option value="6">Spain</option>
-                                                        <option value="7">Morocco</option>
-                                                        <option value="8">Iran</option>
-                                                        <option value="9">France</option>
-                                                        <option value="10">Australia</option>
-                                                        <option value="11">Peru</option>
-                                                        <option value="12">Denmark</option>
-                                                        <option value="13">Argentina</option>
-                                                        <option value="14">Iceland</option>
-                                                        <option value="15">Croatia</option>
-                                                        <option value="16">Nigeria</option>
-                                                        <option value="17">Brazil</option>
-                                                        <option value="18">Switzerland</option>
-                                                        <option value="19">Costa Rica</option>
-                                                        <option value="20">Serbia</option>
-                                                        <option value="21">Germany</option>
-                                                        <option value="22">Mexico</option>
-                                                        <option value="23">Sweden</option>
-                                                        <option value="24">South Korea</option>
-                                                        <option value="25">Belgium</option>
-                                                        <option value="26">Panama</option>
-                                                        <option value="27">Tunisia</option>
-                                                        <option value="28">England</option>
-                                                        <option value="29">Poland</option>
-                                                        <option value="30">Senegal</option>
-                                                        <option value="31">Columbia</option>
-                                                        <option value="32">Japan</option>
-                                                    </select>
-                                                </div>
+
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="savePreferences">Save Preferences</button>
                                             </div>
-                                    </form>
-                                    </div>
 
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="savePreferences">Save Preferences</button>
+                                        </div>
                                     </div>
-
                                 </div>
-                            </div>
-                        </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="logoutButton"><button type="button" class="btn btn-success">Log Out</button> -->
-                    </a>
-                </li>
-            </ul>
-            </div>
-            <!-- <span class="navbar-text">
-            Welcome Username
-        </span>
-        <button type="button" class="btn btn-primary">Update Preferences</button>
-        <button type="button" class="btn btn-success">Log Out</button> -->
-    </nav>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="logoutButton">
+                                LOG OUT
+                            </a>
+                        </li>
+
+                    </ul>
+                    </div>
+                </div>
+        </nav>
+    </header>
+
     <div class="jumbotron">
-        <h3>Welcome
-            <em>user </em>
-            <span id='user'></span>
-        </h3>
         <div class="container">
-            <h3 class="text-center" id="faves">MY FAVORITE TEAMS</h3>
+            <h3>Welcome
+                <em>
+                    <span id="user"></span>,
+                </em>
+            </h3>
+            <!-- <h3 class="text-center" id="faves">MY FAVORITE TEAMS</h3> -->
             <div class="row teamRow">
                 <div class="col-md-4 text-center">
-                    <p>OPTION 1</p>
+                    <!-- <p>OPTION 1</p> -->
                     <a href="#" class="teamFlag">
-                        <img width="200" height="200" id="img1">
+                        <img id="img1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwnKctiJECJefCrlklL0YxpaaGDkPU9UesuLEQaI77huB_pl9k">
                     </a>
                 </div>
                 <div class="col-md-8 text-center displayTeam">
@@ -222,7 +232,7 @@
             </div>
 
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-12 text-center">
                 <h3 id="faves">LOCAL MEETUPS</h3>
                 <p>Get Social! Watch games with other passionate fans at a meetup near you.</p>
@@ -231,7 +241,7 @@
                     <button class="btn btn-lg btn-success" id="signupButton">Add a meetup</button>
                 </p>
             </div>
-        </div>
+        </div> -->
 
 
     </div>
@@ -271,7 +281,7 @@
         var fave3 = "";
         var objectForMyMysql;
 
-        database.ref().once("value", function (snapshot) {
+        database.ref().on("value", function (snapshot) {
             data = snapshot.val();
             // console.log("DATA: ", data);
             // console.log("==========================");
@@ -282,11 +292,12 @@
                 if (username === data[keys[i]].username) {
 
                     console.log("found the user");
-                    console.log('[keys[i]] (unique id) : ', [keys[i]]);
+                    console.log('[keys[i]] (unique id) : ', keys[i]);
                     console.log('Here is his info: ', data[keys[i]]);
 
                     // here, we can populate the team info.
                     $('.teamFlag').on('click', function () {
+                        console.log('clicked');
                         $('#nav-tab').removeClass('d-none');
                         $('#nav-tabContent').removeClass('d-none');
 
@@ -314,7 +325,7 @@
                         objectForMyMysql = data[keys[i]];
                         console.log(objectForMyMysql);
 
-                        database.ref(keys[i]).set(data[keys[i]]);
+                        database.ref().set(data[keys[i]]);
                     });
                 }
             }

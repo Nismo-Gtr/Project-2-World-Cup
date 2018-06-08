@@ -15,6 +15,8 @@ var firebase_config = {
 firebase.initializeApp(firebase_config);
 var database = firebase.database();
 
+firebase.auth().signOut();
+
 
 $(document).ready(function () {
 

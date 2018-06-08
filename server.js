@@ -1,3 +1,4 @@
+
 // Dependencies
 
 var path = require("path");
@@ -10,6 +11,7 @@ var cup = require("./java");
 var mysql = require("mysql");
 var moment = require('moment');
 var moment = require('moment-timezone');
+var Combinatorics = require('js-combinatorics');
 
 // Set the port of our application
 // process.env.PORT lets the port be set by Heroku
@@ -23,7 +25,7 @@ var PORT = process.env.PORT || 3000;
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static("app/public"));
+app.use(express.static("public"));
 
 
 // Routes
@@ -52,12 +54,26 @@ app.post("/api/characters", function(req, res) {
 
 });
 
+// get route for login page
+app.get("/login", function (req, res) {
+  res.sendFile(path.join(__dirname, "login.html"));
+});
+
+// Check for user credentials match
+app.post("/authenticate", function (req, res) {
+  console.log("POST request - req.body: ", req.body)
+  res.send(req.body);
+});
+
+app.get("/userDashboard", function (req, res) {
+  res.sendFile(path.join(__dirname, "./userDashboard.html"));
+});
+
 // Starts the server to begin listening
 // =============================================================
 
 
-var Combinatorics = require('js-combinatorics');
-var getJSON = require('get-json');
+
 
 var cDat = cup;
 

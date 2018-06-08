@@ -40,6 +40,12 @@ app.get("/bracket", function(req, res) {
 
 app.use('/bracket/assets', express.static(path.join(__dirname, './Bracket/assets')))
 
+app.get("/bracket", function(req, res) {
+  res.sendFile(path.join(__dirname, "Map/maps.html"));
+});
+
+app.use('/maps', express.static(path.join(__dirname, './maps.html')))
+
 // Starts the server to begin listening
 
 var Combinatorics = require('js-combinatorics');

@@ -1,0 +1,15 @@
+{
+  "name": "Bracket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bracketjq.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "luxon": "^1.2.1"
+  }
+}

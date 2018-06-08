@@ -27,34 +27,20 @@ app.use(express.static("app/public"));
 
 
 // Routes
-// =============================================================
-
-app.use('/assets', express.static(path.join(__dirname, './public/assets')))
 
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "./home2.html"));
 });
 
-app.get("/add", function(req, res) {
-  res.sendFile(path.join(__dirname, "add.html"));
+app.use('/assets', express.static(path.join(__dirname, './public/assets')))
+
+app.get("/bracket", function(req, res) {
+  res.sendFile(path.join(__dirname, "Bracket/bracket.html"));
 });
 
-app.get("/api/characters", function(req, res) {
-  return res.json(characters);
-});
-
-
-app.get("/api/characters/:character", function(req, res) {
-
-});
-
-app.post("/api/characters", function(req, res) {
-
-});
+app.use('/bracket/assets', express.static(path.join(__dirname, './Bracket/assets')))
 
 // Starts the server to begin listening
-// =============================================================
-
 
 var Combinatorics = require('js-combinatorics');
 var getJSON = require('get-json');

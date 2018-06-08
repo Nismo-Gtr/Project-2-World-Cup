@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
     <link href="/assets/style2.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link rel="stylesheet" media="screen" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+    <!-- <link rel="stylesheet" media="screen" href="public/assets/style2.css"> -->
     <title>FIFA World Cup</title>
 </head>
 
@@ -26,13 +27,16 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
+                            <a class="nav-link" href="home2.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">Login/Sign Up</a>
+                            <a class="nav-link" id="loginModalButton" data-toggle="modal" data-target="#exampleModal" href="#">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="post.html">Brackets</a>
+                            <a class="nav-link" id="signupModalButton" data-toggle="modal" data-target="#exampleModal1" href="#">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/bracket">Brackets</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">Meet Ups</a>
@@ -111,55 +115,55 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="post-preview" data-aos="fade-up" data-aos-duration="3000">
-                        <a href="post.html">
+                        <a href="https://www.fifa.com/fifa-world-ranking/news/y=2018/m=6/news=poland-and-uruguay-climb-ahead-of-russia-2018.html">
                             <h2 class="post-title">
-                                Man must explore, and this is exploration at its greatest
+                                Poland and Uruguay climb ahead of Russia 2018
                             </h2>
                             <h3 class="post-subtitle">
-                                Problems look mighty small from 150 miles up
+                                FIFA/COCA-COLA WORLD RANKING
                             </h3>
                         </a>
                         <p class="post-meta">Posted by
-                            <a href="#">Start Bootstrap</a>
-                            on September 24, 2018</p>
+                            <a href="FIFA.com">(FIFA.com) </a>
+                            07 Jun 2018</p>
                     </div>
                     <hr>
                     <div class="post-preview" data-aos="fade-up" data-aos-duration="3000">
-                        <a href="post.html">
+                        <a href="https://www.fifa.com/worldcup/news/take-the-fifa-world-cup-bracket-challenge">
                             <h2 class="post-title">
-                                I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
+                                Take the FIFA World Cup Bracket Challenge
                             </h2>
                         </a>
                         <p class="post-meta">Posted by
-                            <a href="#">Start Bootstrap</a>
-                            on September 18, 2018</p>
+                            <a href="https://www.fifa.com/worldcup/news/take-the-fifa-world-cup-bracket-challenge">2018 FIFA WORLD CUP™ </a>
+                            26 Apr 2018</p>
                     </div>
                     <hr>
                     <div class="post-preview" data-aos="fade-up" data-aos-duration="3000">
-                        <a href="post.html">
+                        <a href="https://www.fifa.com/worldcup/news/fifa-welcomes-fan-movement">
                             <h2 class="post-title">
-                                Science has not yet mastered prophecy
+                                FIFA welcomes Fan Movement
                             </h2>
                             <h3 class="post-subtitle">
-                                We predict too much for the next year and yet far too little for the next ten.
+                                The worldwide popularity of football brings people together...
+                            </h3>
+                        </a>
+                        <p class="https://FIFA.com">Posted by
+                            <a href="http">© FIFA.com</a>
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="post-preview" data-aos="fade-up" data-aos-duration="3000">
+                        <a href="http://www.fifa.com/worldcup/organisation/fan-fest/index.html">
+                            <h2 class="post-title">
+                                Share FIFA Fan Fest
+                            </h2>
+                            <h3 class="post-subtitle">
+                                FIFA Fan Fest Experience
                             </h3>
                         </a>
                         <p class="post-meta">Posted by
-                            <a href="#">Start Bootstrap</a>
-                            on August 24, 2018</p>
-                    </div>
-                    <hr>
-                    <div class="post-preview" data-aos="fade-up" data-aos-duration="3000">
-                        <a href="post.html">
-                            <h2 class="post-title">
-                                Failure is not an option
-                            </h2>
-                            <h3 class="post-subtitle">
-                                Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-                            </h3>
-                        </a>
-                        <p class="post-meta">Posted by
-                            <a href="#">Start Bootstrap</a>
+                            <a href="http://www.fifa.com/worldcup/organisation/fan-fest/index.html">2018 FIFA WORLD CUP™ </a>
                             on July 8, 2018</p>
                     </div>
                     <hr>
@@ -188,12 +192,12 @@
                         </li>
                         <li class="list-inline-item">
                             <a href="https://twitter.com">
-                                    <i class="fab fa-twitter"></i>
+                                <i class="fab fa-twitter"></i>
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a href="https://github.com/Nismo-Gtr/Project-2-World-Cup">
-                            <i class="fab fa-github"></i>
+                                <i class="fab fa-github"></i>
                             </a>
                         </li>
                     </ul>
@@ -203,11 +207,106 @@
         </div>
     </footer>
 
+
+    <!-- Modal Loggin -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">User Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="loginID" aria-describedby="emailHelp" placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck0">
+                                    <label class="form-check-label" for="exampleCheck0">Remember Me</label>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-12 buttonRow">
+                                        <button class="btn btn-lg btn-primary btn-block" id="loginButton" type="submit">Login</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Sign up -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title text-center" id="exampleModalLongTitle">New User Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-center">Sign Up</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Username</label>
+                                    <input type="text" class="form-control" id="userName" aria-describedby="emailHelp" placeholder="username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="userPassword" placeholder="Password">
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-12 buttonRow">
+                                        <button class="btn btn-lg btn-primary btn-block" id="signupButton" type="submit">Sign Up</button>
+
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END OF MODAL -->
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
     <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
     <script src="/assets/script.js"></script>
+    <script src="/assets/login.js"></script>
+    <script src="/assets/modal.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- <script>$('.carousel').carousel(cycle)</script>  -->
 

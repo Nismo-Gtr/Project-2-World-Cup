@@ -72,6 +72,14 @@ header {
     color: white;
 }
 
+#workAround {
+    border-bottom: none;
+    /* background-color: white; */
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    color: white;
+}
+
 nav#mainNav {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100 */
 background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
@@ -88,24 +96,33 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 
   }
   
+  a {
+      color: white;
+  }
   #mainNav .navbar-brand {
     font-weight: 800;
     color: #343a40;
   }
   
-  #mainNav .navbar-toggler {
+  #workAround .navbar-toggler {
     font-size: 12px;
     font-weight: 800;
     padding: 13px;
     text-transform: uppercase;
-    color: #343a40;
+    color: white;
   }
-  
-  #mainNav .navbar-nav > li.nav-item > a {
+
+  .teamFlag {
+      color: black;
+  }
+
+  #workAround .navbar-nav > li.nav-item > a {
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 1px;
     text-transform: uppercase;
+    color: white;
+    padding: 10px 20px;
   }
   
   .navbar-light .navbar-nav .nav-link {
@@ -200,10 +217,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 
 .navbar {
 color: white;
-}
-
-.btn-block {
-    /* border: 2px solid black; */
 }
 
 #signup {

@@ -250,18 +250,6 @@
                         
                 </div>
             </div>
-            <!-- <div class="row">
-            <div class="col-md-12 text-center">
-                <h3 id="faves">LOCAL MEETUPS</h3>
-                <p>Get Social! Watch games with other passionate fans at a meetup near you.</p>
-                <p></p>
-                <p>
-                    <button class="btn btn-lg btn-success" id="signupButton">Add a meetup</button>
-                </p>
-            </div>
-        </div> -->
-
-
         </div>
         <!-- JAVASCRIPT AND JQUERY -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -283,6 +271,7 @@
 
             firebase.initializeApp(firebase_config);
             var database = firebase.database();
+            var myUniqueId;
 
             // Retrieve the object from storage
             var retrievedObject = localStorage.getItem('currentUser');
@@ -301,17 +290,19 @@
 
             database.ref().on("value", function (snapshot) {
                 data = snapshot.val();
-                // console.log("DATA: ", data);
-                // console.log("==========================");
-                var keys = Object.keys(data);
+                console.log("DATA: ", data);
+                console.log("==========================");
+                var keys = Object.keys(data.users);
+                // console.log('keys: ', keys);
                 for (var i = 0; i < keys.length; i++) {
                     // console.log("data[keys[i]].email", data[keys[i]].email);
-
-                    if (username === data[keys[i]].username) {
+                    // change this reference. 
+                    myUniqueId = keys[i];
+                    if (username === data.users[keys[i]].username) {
 
                         console.log("found the user");
                         console.log('[keys[i]] (unique id) : ', keys[i]);
-                        console.log('Here is his info: ', data[keys[i]]);
+                        console.log('Here is his info: ', data.users[keys[i]]);
 
                         // here, we can populate the team info.
                         $('.teamFlag').on('click', function () {
@@ -331,7 +322,7 @@
                             console.log('fave2: ', fave2);
                             console.log('fave3: ', fave3);
 
-                            data[keys[i]] = {
+                            myInfo = {
                                 username: username,
                                 email: email,
                                 password: password,
@@ -340,10 +331,10 @@
                                 team3: fave3
                             };
 
-                            objectForMyMysql = data[keys[i]];
-                            console.log(objectForMyMysql);
-
-                            database.ref().set(data[keys[i]]);
+                            // objectForMyMysql = data[keys[i]];
+                            // console.log(objectForMyMysql);
+                            console.log('my unique id: ', keys[i]);
+                            database.ref('users/' + myUniqueId).set(myInfo);
                         });
                     }
                 }

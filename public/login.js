@@ -63,11 +63,12 @@ $(document).ready(function () {
                 // console.log("response.password: ", response.password);
 
                 // check the database for matching email/password pairs
-                database.ref().on("value", function (snapshot) {
+                database.ref('/users').on("value", function (snapshot) {
                     data = snapshot.val();
                     // console.log("DATA: ", data);
                     // console.log("==========================");
                     var keys = Object.keys(data);
+                    console.log('login keys', keys);
                     for (var i = 0; i < keys.length; i++) {
                         // console.log("data[keys[i]].email", data[keys[i]].email);
                         if (response.email === data[keys[i]].email && response.password === data[keys[i]].password) {
@@ -133,7 +134,7 @@ $(document).ready(function () {
                 console.log("response.username", response.username);
                 console.log("response.email: ", response.email);
                 console.log("response.password: ", response.password);
-                database.ref().push(response);
+                database.ref('/users').push(response);
                 // $('#logoutButton').show();
                 // $('#loggedInUser').text('Welcome ' + userDisplayName);
                 // $('#loginModal').modal('hide');
@@ -187,14 +188,8 @@ $(document).ready(function () {
                 console.log("response.username", response.username);
                 console.log("response.email: ", response.email);
                 console.log("response.password: ", response.password);
-                database.ref().push(response);
-                $('#logoutButton').show();
-                $('#loggedInUser').text('Welcome ' + response.username);
-                $('#loginModal').modal('hide');
-                $('#signupModal').modal('hide');
-                $('#loginModalButton').hide();
-                $('#signupModalButton').hide();
-                $('#jumbotron').removeClass('d-none');
+                database.ref('/users').push(response);
+                
                 currentUser = response;
                 console.log('currentUser: ', currentUser);
 
@@ -210,26 +205,6 @@ $(document).ready(function () {
                 window.location.replace('/userDashboard');
                 
             });
-
-
-            // .then(response, function(){
-            //     response.redirect('/userDashboard');
-            // })
-
-            // $('#logoutButton').show();
-            // // $('#loggedInUser').text('Welcome ' + displayName);
-            // $('#loginModal').modal('hide');
-            // $('#signupModal').modal('hide');
-            // $('#loginModalButton').hide();
-            // $('#signupModalButton').hide();
-
-            // console.log('userdisplayname:', userDisplayName);
-            // console.log('display name: ', displayName);
-            // console.log('email', email);
-            // console.log('email verfired: ', emailVerified);
-            // console.log('photourl: ', photoURL);
-            // console.log('uid: ', uid);
-            // console.log('providerdata: ', providerData);
 
         } else {
             console.log('no user logged in');
@@ -320,8 +295,5 @@ $(document).ready(function () {
         });
 
     });
-
-    // Routes
-
 
 });

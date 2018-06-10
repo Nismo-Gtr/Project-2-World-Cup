@@ -323,9 +323,7 @@
                             console.log('fave3: ', fave3);
 
                             myInfo = {
-                                username: username,
-                                email: email,
-                                password: password,
+                                
                                 team1: fave1,
                                 team2: fave2,
                                 team3: fave3
@@ -334,7 +332,7 @@
                             // objectForMyMysql = data[keys[i]];
                             // console.log(objectForMyMysql);
                             console.log('my unique id: ', keys[i]);
-                            database.ref('users/' + myUniqueId).set(myInfo);
+                            database.ref('users/' + myUniqueId).update(myInfo);
                         });
                     }
                 }

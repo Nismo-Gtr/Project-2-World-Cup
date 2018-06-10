@@ -37,9 +37,7 @@
 
 
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Create Watch Party
-  </button>
+
   <div id="map"></div>
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -250,43 +248,43 @@
 
   <script>
 
-        $('#exampleModal').on('shown.bs.modal', function () {
-          $('#myInput').trigger('focus')
-        })
+    $('#exampleModal').on('shown.bs.modal', function () {
+      $('#myInput').trigger('focus')
+    })
 
-
-   // Note: This example requires that you consent to location sharing when
+      // Note: This example requires that you consent to location sharing when
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
 
-        var map, infoWindow;
-        function initMap() {
-          map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 12,
-            mapTypeId: 'roadmap'
+      var map, infoWindow;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          mapTypeId: 'roadmap'
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            var addParty = '<h4>You are here!</h4><br/><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Create Watch Party</button>';
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(addParty);
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function () {
+            handleLocationError(true, infoWindow, map.getCenter());
           });
-          infoWindow = new google.maps.InfoWindow;
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
 
-          // Try HTML5 geolocation.
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-              var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-              };
-
-              infoWindow.setPosition(pos);
-              infoWindow.setContent('You are here!');
-              infoWindow.open(map);
-              map.setCenter(pos);
-            }, function () {
-              handleLocationError(true, infoWindow, map.getCenter());
-            });
-          } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
-          }
-        
 
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
           infoWindow.setPosition(pos);
@@ -296,11 +294,9 @@
           infoWindow.open(map);
         }
 
-
-      var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
       var icons = {
         info: {
-          icon: './soccer-game (1).png'
+          icon: './assets/IMG/soccer-game-(1).png'
         }
       };
 
@@ -315,9 +311,9 @@
             '<h6 id="firstHeading" class="firstHeading">The Globe Pub</h6>' +
             '<div id="bodyContent">' +
 
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p><img src="./globe.jpeg">' +  
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p><img src="./assets/IMG/globe.jpeg">' +
 
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' +
             '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
             '<p><strong>Phone: </strong>(312) 836-0066</p>' +
             '</div>',
@@ -325,13 +321,13 @@
         }, {
           name: "Fado's Irish Pub",
           position: new google.maps.LatLng(41.8919, -87.6313),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
             '<h6 id="firstHeading" class="firstHeading">Fado\'s Irish Pub</h6>' +
             '<div id="bodyContent">' +
-            '<p>A traditional Irish atmosphere, with Guinness, whiskey & pub food faves, plus European soccer on TV.</p><img src="./Fados.jpg">' +  
-            '<p><strong>Address: </strong><br>100 W Grand Ave, Chicago, IL 60654<br>' + 
+            '<p>A traditional Irish atmosphere, with Guinness, whiskey & pub food faves, plus European soccer on TV.</p><img src="./assets/Fados.jpg">' +
+            '<p><strong>Address: </strong><br>100 W Grand Ave, Chicago, IL 60654<br>' +
             '<strong>Hours: </strong><br>Monday-Friday 11:30AM-2AM<br>Saturday 7:30AM-3AM<br>Sunday 7:30AM-2AM<br></p>' +
             '<p><strong>Phone: </strong>(773) 871-3757</p>' +
             '</div>',
@@ -339,13 +335,13 @@
         }, {
           name: "Cleo's Bar and Grill",
           position: new google.maps.LatLng(41.8959, -87.6759),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
             '<h6 id="firstHeading" class="firstHeading">Cleo\'s Bar and Grill</h6>' +
-            '<div id="bodyContent">' + 
-            '<p>Neighborhood bar & grill offering craft beers, classic pub grub served late & soccer on TV.</p>' +  '<div><img src="./Cleo\'s.jpg"></div>' +
-            '<p><strong>Address: </strong><br>1935 W Chicago Ave, Chicago, IL 60622<br>' + 
+            '<div id="bodyContent">' +
+            '<p>Neighborhood bar & grill offering craft beers, classic pub grub served late & soccer on TV.</p>' + '<div><img src="./assets/Cleo\'s.jpg"></div>' +
+            '<p><strong>Address: </strong><br>1935 W Chicago Ave, Chicago, IL 60622<br>' +
             '<strong>Hours: </strong><br>Monday-Friday 12PM-4AM<br>Saturday 10AM-12AM<br>Sunday 10:30AM-4AM<br></p>' +
             '<p><strong>Phone: </strong>(312) 243-5600</p>' +
             '</div>',
@@ -353,15 +349,15 @@
         }, {
           name: "Theory",
           position: new google.maps.LatLng(41.8901, -87.6285),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
 
             '<h6 id="firstHeading" class="firstHeading">Theory</h6>' +
             '<div id="bodyContent">' +
-            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p><img src="./theory.jpeg">' +  
+            '<p>Neighborhood pub & sports bar with European soccer on TV, a jumbo beer list & British fare.</p><img src="./assets/theory.jpeg">' +
 
-            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' + 
+            '<p><strong>Address: </strong><br>934 W Irving Park Road, Chicago, IL 60613<br>' +
             '<strong>Hours: </strong><br>Monday-Wednesday 11AM-12AM<br>Thursday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-12AM<br></p>' +
             '<p><strong>Phone: </strong>(773) 871-3757</p>' +
             '</div>',
@@ -369,14 +365,14 @@
         }, {
           name: "The Scout Waterhouse + Kitchen",
           position: new google.maps.LatLng(41.8659, -87.6255),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
 
             '<h6 id="firstHeading" class="firstHeading">The Scout Waterhouse + Kitchen</h6>' +
             '<div id="bodyContent">' +
-            '<p>Rustic watering hole with a long beer list, souped-up pub grub, lots of TVs & patio seating.</p><img src="./scoutwaterhouse.jpeg">' +  
-            '<p><strong>Address: </strong><br>1301 S Wabash Ave, Chicago, IL 60605<br>' + 
+            '<p>Rustic watering hole with a long beer list, souped-up pub grub, lots of TVs & patio seating.</p><img src="./assets/scoutwaterhouse.jpeg">' +
+            '<p><strong>Address: </strong><br>1301 S Wabash Ave, Chicago, IL 60605<br>' +
             '<strong>Hours: </strong><br>Monday--Friday 2PM-2AM<br>Saturday 10AM-2AM<br>Sunday 10AM-2AM<br></p>' +
             '<p><strong>Phone: </strong>(312) 705-0595</p>' +
 
@@ -385,14 +381,14 @@
         }, {
           name: "Lincoln Park South Fields",
           position: new google.maps.LatLng(41.9141, -87.6290),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
 
             '<h6 id="firstHeading" class="firstHeading">Lincoln Park South Fields</h6>' +
             '<div id="bodyContent">' +
-            '<p>Stretch of Lincoln Park featuring multiple softball fields & ample green space along the lake shore.</p><img src="./lincolnpark.jpeg">' +  
-            '<p><strong>Address: </strong><br>1627 N Stockton Dr, Chicago, IL 60614<br>' + 
+            '<p>Stretch of Lincoln Park featuring multiple softball fields & ample green space along the lake shore.</p><img src="./assets/lincolnpark.jpeg">' +
+            '<p><strong>Address: </strong><br>1627 N Stockton Dr, Chicago, IL 60614<br>' +
             '<strong>Hours: </strong><br>Monday-Sunday 7AM-11PM<br></p>' +
             '<p><strong>Phone: </strong>(312) 742-7726</p>' +
 
@@ -401,14 +397,14 @@
         }, {
           name: "AJ Hudson's Public House",
           position: new google.maps.LatLng(41.9509, -87.6686),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
 
             '<h6 id="firstHeading" class="firstHeading">A.J. Hudson\'s Public House</h6>' +
             '<div id="bodyContent">' +
-            '<p>This relaxed pub offers multiple TVs for sports fans, a vast beer selection, snacks & sandwiches.</p><img src="./AJHudson.png">' +  
-            '<p><strong>Address: </strong><br>3801 N Ashland Ave, Chicago, IL 60613<br>' + 
+            '<p>This relaxed pub offers multiple TVs for sports fans, a vast beer selection, snacks & sandwiches.</p><img src="./assets/AJHudson.png">' +
+            '<p><strong>Address: </strong><br>3801 N Ashland Ave, Chicago, IL 60613<br>' +
             '<strong>Hours: </strong><br>Monday-Friday 11AM-2AM<br>Saturday 6AM-3AM<br>Sunday 7AM-2AM<br></p>' +
             '<p><strong>Phone: </strong>(773) 348-2767</p>' +
 
@@ -417,14 +413,14 @@
         }, {
           name: "Chicago Fire Soccer Dome",
           position: new google.maps.LatLng(41.9478, -87.6954),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
 
             '<h6 id="firstHeading" class="firstHeading">Chicago Fire Soccer Dome</h6>' +
             '<div id="bodyContent">' +
-            '<p>CIBC Fire Pitch has two full-size outdoor pitches from April through November and a 100,000-square-foot dome with multiple field configurations in the winter. The 12,500-square-foot clubhouse features Pub97 and restaurant, an outdoor patio, concessions, merchandise store, gym and meeting and party space.</p><img src="./firesoccerdome.jpeg">' +  
-            '<p><strong>Address: </strong><br>3626 N Talman Ave, Chicago, IL 60618<br>' + 
+            '<p>CIBC Fire Pitch has two full-size outdoor pitches from April through November and a 100,000-square-foot dome with multiple field configurations in the winter. The 12,500-square-foot clubhouse features Pub97 and restaurant, an outdoor patio, concessions, merchandise store, gym and meeting and party space.</p><img src="./assets/firesoccerdome.jpeg">' +
+            '<p><strong>Address: </strong><br>3626 N Talman Ave, Chicago, IL 60618<br>' +
             '<strong>Hours: </strong><br>Monday-Friday 7AM-11:30PM<br>Saturday 9AM-8PM<br>Sunday 9AM-10PM<br></p>' +
             '<p><strong>Phone: </strong>(773) 944-1086</p>' +
             '</div>',
@@ -433,14 +429,14 @@
           name: "McKinley Park",
 
           position: new google.maps.LatLng(41.8239, -87.6824),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
 
             '<h6 id="firstHeading" class="firstHeading">McKinley Park</h6>' +
             '<div id="bodyContent">' +
-            '<p>McKinley Park, one of the 77 official community areas of Chicago, Illinois, is located on the city\'s southwest side.</p><img src="./mckinley.jpeg">' +  
-            '<p><strong>Address: </strong><br>2210 W Pershing Rd, Chicago, IL 60609<br>' + 
+            '<p>McKinley Park, one of the 77 official community areas of Chicago, Illinois, is located on the city\'s southwest side.</p><img src="./assets/mckinley.jpeg">' +
+            '<p><strong>Address: </strong><br>2210 W Pershing Rd, Chicago, IL 60609<br>' +
             '<strong>Hours: </strong><br>Monday-Sunday 6AM-11PM<br></p>' +
             '<p><strong>Phone: </strong>(312) 747-6527</p>' +
 
@@ -449,14 +445,14 @@
         }, {
           name: "Hawthorne Soccer Field",
           position: new google.maps.LatLng(41.8340, -87.7620),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
 
             '<h6 id="firstHeading" class="firstHeading">Hawthorne Soccer Field</h6>' +
             '<div id="bodyContent">' +
-            '<p>Public Soccer Field in Hawthorne Park District</p><img src="./hawthorne.jpeg">' +  
-            '<p><strong>Address: </strong><br>3215 S Central Ave, Cicero, IL 60804<br>' + 
+            '<p>Public Soccer Field in Hawthorne Park District</p><img src="./assets/hawthorne.jpeg">' +
+            '<p><strong>Address: </strong><br>3215 S Central Ave, Cicero, IL 60804<br>' +
             '<strong>Hours: </strong><br>Monday-Sunday 6AM-11PM<br></p>' +
             '<p><strong>Phone: </strong>(708) 863-6511</p>' +
 
@@ -465,14 +461,14 @@
         }, {
           name: "Hopsmith Tavern",
           position: new google.maps.LatLng(41.9040, -87.6293),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
 
             '<h6 id="firstHeading" class="firstHeading">Hopsmith Tavern</h6>' +
             '<div id="bodyContent">' +
-            '<p>Pub serving burgers, tacos & more in bi-level digs with 2 bars, multiple TVs & late hours.</p><img src="./hopsmith.jpeg">' +  
-            '<p><strong>Address: </strong><br>15 W Division St, Chicago, IL 60610<br>' + 
+            '<p>Pub serving burgers, tacos & more in bi-level digs with 2 bars, multiple TVs & late hours.</p><img src="./assets/hopsmith.jpeg">' +
+            '<p><strong>Address: </strong><br>15 W Division St, Chicago, IL 60610<br>' +
             '<strong>Hours: </strong><br>Monday-Sunday 12PM-4AM<br></p>' +
             '<p><strong>Phone: </strong>(312) 600-9816</p>' +
 
@@ -481,14 +477,14 @@
         }, {
           name: "Old Town Pour House",
           position: new google.maps.LatLng(41.9395, -87.6358),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
 
             '<h6 id="firstHeading" class="firstHeading">Old Town Pour House</h6>' +
             '<div id="bodyContent">' +
-            '<p>Upscale pub food & a massive beer list served in an elegant wood-clad space with a mezzanine.</p><img src="./oldtown.jpeg">' +  
-            '<p><strong>Address: </strong><br>1419 N Wells St, Chicago, IL 60610<br>' + 
+            '<p>Upscale pub food & a massive beer list served in an elegant wood-clad space with a mezzanine.</p><img src="./assets/oldtown.jpeg">' +
+            '<p><strong>Address: </strong><br>1419 N Wells St, Chicago, IL 60610<br>' +
             '<strong>Hours: </strong><br>Monday 4PM-12AM<br>Tuesday-Wednesday 4PM-2AM<br>Thursday 4PM-2AM<br>Friday 11:30AM-2AM<br>Saturday 11:30AM-3AM<br>Sunday 11:30AM-12AM<br></p>' +
             '<p><strong>Phone: </strong>(312) 477-2800</p>' +
 
@@ -497,14 +493,14 @@
         }, {
           name: "Will's Northwoods Inn",
           position: new google.maps.LatLng(41.9375, -87.6589),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
 
             '<h6 id="firstHeading" class="firstHeading">Will\'s Northwoods Inn</h6>' +
             '<div id="bodyContent">' +
-            '<p>Bar, patio & haven for Wisconsinites with cheese curds & other pub grub plus TVs tuned to the game.</p><img src="./northwoods inn.jpeg">' +  
-            '<p><strong>Address: </strong><br>3030 N Racine Ave, Chicago, IL 60657<br>' + 
+            '<p>Bar, patio & haven for Wisconsinites with cheese curds & other pub grub plus TVs tuned to the game.</p><img src="./assets/northwoods inn.jpeg">' +
+            '<p><strong>Address: </strong><br>3030 N Racine Ave, Chicago, IL 60657<br>' +
             '<strong>Hours: </strong><br>Monday-Friday 11AM-2AM<br>Saturday 9:30AM-3AM<br>Sunday 9:30AM-2AM<br></p>' +
             '<p><strong>Phone: </strong>(773) 528-4400</p>' +
 
@@ -513,14 +509,14 @@
         }, {
           name: "ChiTown Futbol",
           position: new google.maps.LatLng(41.8497, -87.6579),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
 
             '<h6 id="firstHeading" class="firstHeading">ChiTown Futbol</h6>' +
             '<div id="bodyContent">' +
-            '<p>NChicago´s Best Indoor Soccer FacilityPlay Now ... The ChiTown Indoor Soccer Sport Center is Chicago\'s premier indoor soccer training venue</p><img src="./chitownfutbol.jpeg">' +  
-            '<p><strong>Address: </strong><br>2343 S Throop St, Chicago, IL 60608<br>' + 
+            '<p>NChicago´s Best Indoor Soccer FacilityPlay Now ... The ChiTown Indoor Soccer Sport Center is Chicago\'s premier indoor soccer training venue</p><img src="./assets/chitownfutbol.jpeg">' +
+            '<p><strong>Address: </strong><br>2343 S Throop St, Chicago, IL 60608<br>' +
             '<strong>Hours: </strong><br>Monday-Sunday 12AM-12AM<br></p>' +
             '<p><strong>Phone: </strong>(312) 226-1988</p>' +
 
@@ -529,14 +525,14 @@
         }, {
           name: "Timothy O'Toole's",
           position: new google.maps.LatLng(41.8935, -87.6204),
-          description:    '<div id="content">' +
+          description: '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
 
             '<h6 id="firstHeading" class="firstHeading">Timothy O\'Tooole\'s</h6>' +
             '<div id="bodyContent">' +
-            '<p>Pub with TVs, billiards & a large menu of bar food, with daily food & drink specials.</p><img src="./timotooles.jpeg">' +  
-            '<p><strong>Address: </strong><br>622 N Fairbanks Ct, Chicago, IL 60611<br>' + 
+            '<p>Pub with TVs, billiards & a large menu of bar food, with daily food & drink specials.</p><img src="./public/assets/IMG/timotooles.jpeg">' +
+            '<p><strong>Address: </strong><br>622 N Fairbanks Ct, Chicago, IL 60611<br>' +
             '<strong>Hours: </strong><br>Sunday-Monday 11AM-3AM<br>Thursday-Saturday 11AM-4AM</p>' +
             '<p><strong>Phone: </strong>(312) 642-0700</p>' +
 
@@ -586,35 +582,35 @@
       document.getElementById('submit').addEventListener('click', function () {
         geocodeAddress(geocoder, map);
       });
-    }
 
 
-    function geocodeAddress(geocoder, resultsMap) {
 
-      var address = $("#streetAddress").val() + ", " + $("#city").val() + ", " + $("#stateList").val()
-      geocoder.geocode({ 'address': address }, function (results, status) {
-        var infowindow = new google.maps.InfoWindow({
-          content: "contentString"
+      function geocodeAddress(geocoder, resultsMap) {
+
+        var address = $("#streetAddress").val() + ", " + $("#city").val() + ", " + $("#stateList").val()
+        geocoder.geocode({ 'address': address }, function (results, status) {
+          var infowindow = new google.maps.InfoWindow({
+            content: "contentString"
+          });
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location,
+              icon: './assets/IMG/soccer-game-(1).png'
+            });
+            var infowindow = new google.maps.InfoWindow({ content: "<h4>" + $("#firstName").val() + " " + $("#lastName").val() + '</h4><br><button type="button" class="btn btn-secondary">RSVP</button><br><h6></h6><br>' + $("#gameSchedule").val() + "<br>" + "Max Attendence: " + $("#attendees").val() + "<br>" + address });
+            marker.addListener('click', function () {
+              infowindow.open(map, marker);
+            });
+            console.log(results);
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
         });
-        if (status === 'OK') {
-          resultsMap.setCenter(results[0].geometry.location);
-          var marker = new google.maps.Marker({
-            map: resultsMap,
-            position: results[0].geometry.location,
-            icon: './soccer-game (1).png'
-          });
-          var infowindow = new google.maps.InfoWindow({ content: "<h4>" + $("#firstName").val() + " " + $("#lastName").val() + "</h4><br>" + $("#gameSchedule").val() + "<br>" + "Max Attendence: " + $("#attendees").val() + "<br>" + address });
-          marker.addListener('click', function () {
-            infowindow.open(map, marker);
-          });
-          console.log(results);
-        } else {
-          alert('Geocode was not successful for the following reason: ' + status);
-        }
-      });
+      };
+
     };
-
-
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwBYAaZOV6J4PXhuaCD-IZ6OMxEopoNLU&callback=initMap">
   </script>

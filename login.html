@@ -6,202 +6,346 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./loginstyle2.css">
-    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-
-    <title>LOGIN PAGE</title>
+    <link rel="stylesheet" href="/dashboard.css">
+    <title>User Dashboard</title>
 </head>
 
 <body>
+    <!-- Navbar with World Cup 2018 on the left & 'Welcome + Username', Update Preferences Button and Logout Button/Tab on the right -->
+    <!-- <nav class="navbar navbar-light bg-light justify-content-between"> -->
+    <header>
+        <nav class="navbar navbar-expand-lg" id="workAround">
+            <div class="container">
+                <a class="navbar-brand" href="home2.html">FIFA WORLD CUP 2018</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/bracket">BRACKETS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/maps">MEET UPS</a>
+                        </li>
+                        <li class="nav-item active">
+                            <!-- Button to Open the Modal -->
+                            <a class="nav-link" href='#' data-toggle="modal" data-target="#myModal">
+                                UPDATE PREFERENCES
+                            </a>
 
-    <div class="container">
+                            <!-- The Modal -->
+                            <div class="modal" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">WORLD CUP 2018</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <!-- LOGIN button -->
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal" id="loginModalButton">
-                            LOGIN
-                        </button>
-                        <!-- LOGIN MODAL -->
-                        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header text-center">
-                                        <h6 class="modal-title text-center">Login</h6>
-                                    
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h5 class="text-center">SIGN IN WITH</h5>
-                                        <div class="row">
-                                            <div class="col-md-12 buttonRow">
-                                                <button class="btn btn-lg btn-primary btn-block facebookButton">Facebook</button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 buttonRow">
-                                                <button class="btn btn-lg btn-primary btn-block twitterButton">Twitter</button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 buttonRow">
-                                                <button class="btn btn-lg btn-primary btn-block googleButton">Google</button>
-                                            </div>
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">User Preferences</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h5 class="text-center or">OR</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Email address</label>
-                                                        <input type="email" class="form-control" id="loginID" aria-describedby="emailHelp" placeholder="Enter email">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Password</label>
-                                                        <input type="password" class="form-control" id="loginPassword" placeholder="Password">
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" id="exampleCheck0">
-                                                        <label class="form-check-label" for="exampleCheck0">Remember Me</label>
-                                                    </div>
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="container">
                                                     <div class="row">
-
-                                                        <div class="col-md-12 buttonRow">
-                                                            <button class="btn btn-lg btn-primary btn-block" id="loginButton" type="submit">Login</button>
-
+                                                        <div class="col-md-12">
+                                                            <h6>Choose upto 3 teams to follow</h6>
                                                         </div>
-
                                                     </div>
-                                                </form>
+                                                    <div class="row options">
+                                                        <div class="col-md-4">
+                                                            <select class="custom-select" id="inputGroupSelect01">
+                                                                <option selected>Choose...</option>
+                                                                <option value="1">Russia</option>
+                                                                <option value="2">Saudi Arabia</option>
+                                                                <option value="3">Egypt</option>
+                                                                <option value="4">Uruguay</option>
+                                                                <option value="5">Portugal</option>
+                                                                <option value="6">Spain</option>
+                                                                <option value="7">Morocco</option>
+                                                                <option value="8">Iran</option>
+                                                                <option value="9">France</option>
+                                                                <option value="10">Australia</option>
+                                                                <option value="11">Peru</option>
+                                                                <option value="12">Denmark</option>
+                                                                <option value="13">Argentina</option>
+                                                                <option value="14">Iceland</option>
+                                                                <option value="15">Croatia</option>
+                                                                <option value="16">Nigeria</option>
+                                                                <option value="17">Brazil</option>
+                                                                <option value="18">Switzerland</option>
+                                                                <option value="19">Costa Rica</option>
+                                                                <option value="20">Serbia</option>
+                                                                <option value="21">Germany</option>
+                                                                <option value="22">Mexico</option>
+                                                                <option value="23">Sweden</option>
+                                                                <option value="24">South Korea</option>
+                                                                <option value="25">Belgium</option>
+                                                                <option value="26">Panama</option>
+                                                                <option value="27">Tunisia</option>
+                                                                <option value="28">England</option>
+                                                                <option value="29">Poland</option>
+                                                                <option value="30">Senegal</option>
+                                                                <option value="31">Columbia</option>
+                                                                <option value="32">Japan</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select class="custom-select" id="inputGroupSelect02">
+                                                                <option selected>Choose...</option>
+                                                                <option value="1">Russia</option>
+                                                                <option value="2">Saudi Arabia</option>
+                                                                <option value="3">Egypt</option>
+                                                                <option value="4">Uruguay</option>
+                                                                <option value="5">Portugal</option>
+                                                                <option value="6">Spain</option>
+                                                                <option value="7">Morocco</option>
+                                                                <option value="8">Iran</option>
+                                                                <option value="9">France</option>
+                                                                <option value="10">Australia</option>
+                                                                <option value="11">Peru</option>
+                                                                <option value="12">Denmark</option>
+                                                                <option value="13">Argentina</option>
+                                                                <option value="14">Iceland</option>
+                                                                <option value="15">Croatia</option>
+                                                                <option value="16">Nigeria</option>
+                                                                <option value="17">Brazil</option>
+                                                                <option value="18">Switzerland</option>
+                                                                <option value="19">Costa Rica</option>
+                                                                <option value="20">Serbia</option>
+                                                                <option value="21">Germany</option>
+                                                                <option value="22">Mexico</option>
+                                                                <option value="23">Sweden</option>
+                                                                <option value="24">South Korea</option>
+                                                                <option value="25">Belgium</option>
+                                                                <option value="26">Panama</option>
+                                                                <option value="27">Tunisia</option>
+                                                                <option value="28">England</option>
+                                                                <option value="29">Poland</option>
+                                                                <option value="30">Senegal</option>
+                                                                <option value="31">Columbia</option>
+                                                                <option value="32">Japan</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select class="custom-select" id="inputGroupSelect03">
+                                                                <option selected>Choose...</option>
+                                                                <option value="1">Russia</option>
+                                                                <option value="2">Saudi Arabia</option>
+                                                                <option value="3">Egypt</option>
+                                                                <option value="4">Uruguay</option>
+                                                                <option value="5">Portugal</option>
+                                                                <option value="6">Spain</option>
+                                                                <option value="7">Morocco</option>
+                                                                <option value="8">Iran</option>
+                                                                <option value="9">France</option>
+                                                                <option value="10">Australia</option>
+                                                                <option value="11">Peru</option>
+                                                                <option value="12">Denmark</option>
+                                                                <option value="13">Argentina</option>
+                                                                <option value="14">Iceland</option>
+                                                                <option value="15">Croatia</option>
+                                                                <option value="16">Nigeria</option>
+                                                                <option value="17">Brazil</option>
+                                                                <option value="18">Switzerland</option>
+                                                                <option value="19">Costa Rica</option>
+                                                                <option value="20">Serbia</option>
+                                                                <option value="21">Germany</option>
+                                                                <option value="22">Mexico</option>
+                                                                <option value="23">Sweden</option>
+                                                                <option value="24">South Korea</option>
+                                                                <option value="25">Belgium</option>
+                                                                <option value="26">Panama</option>
+                                                                <option value="27">Tunisia</option>
+                                                                <option value="28">England</option>
+                                                                <option value="29">Poland</option>
+                                                                <option value="30">Senegal</option>
+                                                                <option value="31">Columbia</option>
+                                                                <option value="32">Japan</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                            </form>
                                             </div>
+
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="savePreferences">Save Preferences</button>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- END OF MODAL -->
-                    </li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="logoutButton">
+                                LOG OUT
+                            </a>
+                        </li>
 
-                    <li class="nav-item active">
-                        <!-- SIGN UP button -->
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#signupModal" id="signupModalButton">
-                            SIGN UP
-                        </button>
-                        <!-- SIGN UP MODAL -->
-                        <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header text-center">
-                                        <h5 class="modal-title text-center" id="exampleModalLongTitle">SIGN UP</h5>
-
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h5 class="text-center">SIGN IN WITH</h5>
-
-                                        <div class="row">
-                                            <div class="col-md-12 buttonRow">
-                                                <button class="btn btn-lg btn-primary btn-block facebookButton">Facebook</button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 buttonRow">
-                                                <button class="btn btn-lg btn-primary btn-block twitterButton">Twitter</button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 buttonRow">
-                                                <button class="btn btn-lg btn-primary btn-block googleButton">Google</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h5 class="text-center or">OR</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Username</label>
-                                                        <input type="text" class="form-control" id="userName" aria-describedby="emailHelp" placeholder="username">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Email address</label>
-                                                        <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Enter email">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Password</label>
-                                                        <input type="password" class="form-control" id="userPassword" placeholder="Password">
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                                                    </div>
-                                                    <div class="row">
-
-                                                        <div class="col-md-12 buttonRow">
-                                                            <button class="btn btn-lg btn-primary btn-block" id="signupButton" type="submit">Sign Up</button>
-
-                                                        </div>
-
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END OF MODAL -->
-                    </li>
-                    <li>
-                        <button type="button" class="btn btn-success hide" id="logoutButton">
-                            LOG OUT
-                        </button>
-                    </li>
-                </ul>
-            </div>
+                    </ul>
+                    </div>
+                </div>
         </nav>
-        <div class="jumbotron d-none" id="jumbotron">
-            <h2 class="text-center">
-                <span id="loggedInUser"></span>
-            </h2>
-            <!-- Form to collect user preferences -->
-            <h3>Pick one or more teams to follow: </h3>
+    </header>
+
+    <div class="jumbotron">
+        <div class="container">
+            <h3>Welcome
+                <em>
+                    <span id="user"></span>,
+                </em>
+            </h3>
+            <!-- <h3 class="text-center" id="faves">MY FAVORITE TEAMS</h3> -->
+            <div class="row teamRow">
+                
+                <div class="col-md-12 text-center displayTeam">
+                        <a href="#" class="teamFlag">
+                                PORTUGAL
+                        </a>
+                </div>
+            </div>
+            <nav>
+                <div class="nav nav-tabs d-none" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active text-center" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"
+                        aria-selected="true">Team Profile</a>
+                    <a class="nav-item nav-link text-center" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact"
+                        aria-selected="false">Latest News Stories</a>
+                </div>
+            </nav>
+            <div class="tab-content d-none" id="nav-tabContent">
+                <div class=" tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav--tab">
+                        <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                        <p>The Portugal national football team (Portuguese: Seleção Portuguesa de Futebol, pronounced [sɨlɛˈsɐ̃w̃ puɾtuˈgezɐ dɨ futɨˈbɔl]) represents Portugal in international men's association football competition since 1921. It is controlled by the Portuguese Football Federation, the governing body for football in Portugal.</p>
+                                        <p>Portugal's first participation in a major tournament finals, at the 1966 FIFA World Cup, saw a team featuring famed striker Eusébio finish in third place. The next two times Portugal qualified for the World Cup finals were in 1986 and 2002, going out in the first round both times. Portugal also made it to the semi-finals of the UEFA Euro 1984 final tournament, losing 3–2 after extra time to the hosts and eventual winners France. The team reached the semi-finals of Euro 2000, the 2006 World Cup and Euro 2012, as well as the final of Euro 2004, the latter on home soil. At Euro 2016, Portugal won its first ever major trophy, defeating hosts France 1–0 after extra time, with the winning goal scored by Eder. With the win, Portugal qualified and made its first appearance in the FIFA Confederations Cup held in Russia, where they finished third.</p>
+                                        <p>The team's home stadium is the Estádio Nacional, in Oeiras, although most of their home games are frequently played in other stadia across the country. The current head coach is Fernando Santos and the captain is Cristiano Ronaldo, who holds the team records for most caps and goals.</p>
+                                </div>
+                                <div class="col-md-2"></div>
+                        </div>
+
+
+                </div>
+                <div class=" tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                    <p><a href="#">Portugal star Rui Patricio’s sex therapist wife urges manager to encourage players to masturbate before big World Cup games</a></p>
+                                    <p><a href="#">Cristiano Ronaldo STUNNED by son’s incredible strike after Portugal game</a></p>
+                                    <p><a href="#">Portugal still far from ideal ahead of World Cup, says Santos</a></p>
+                                    <p><a href="#">Portugal 3-0 Algeria: Bernardo Silva and Cristiano Ronaldo on fire as PSG starlet Goncalo Guedes bags brace in final World Cup warm-up
+                                        </a></p>
+                                    <p><a href="#">Group B News: Spain, Portugal WC Squads Confirmed, Big Stars Snubbed </a></p>
+                            </div>
+                            <div class="col-md-2"></div>
+                    </div>
+                        
+                </div>
+            </div>
         </div>
-        
+        <!-- JAVASCRIPT AND JQUERY -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <!-- <script src="./login.js"></script> -->
+        <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
 
-    </div>
+        <script type="text/javascript">
+            var firebase_config = {
+                apiKey: "AIzaSyA5y8GqPO0dVFs5xshZiFdjKgVgN9OlO0M",
+                authDomain: "world-cup-2018-2e7ca.firebaseapp.com",
+                databaseURL: "https://world-cup-2018-2e7ca.firebaseio.com",
+                projectId: "world-cup-2018-2e7ca",
+                storageBucket: "world-cup-2018-2e7ca.appspot.com",
+                messagingSenderId: "621397211278"
+            };
 
-    <!-- JAVASCRIPT AND JQUERY -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="./login.js"></script>
+            firebase.initializeApp(firebase_config);
+            var database = firebase.database();
+            var myUniqueId;
+
+            // Retrieve the object from storage
+            var retrievedObject = localStorage.getItem('currentUser');
+            console.log('retrievedObject: ', JSON.parse(retrievedObject));
+            var username = JSON.parse(retrievedObject).username;
+            var email = JSON.parse(retrievedObject).email;
+            var password = JSON.parse(retrievedObject).password;
+
+
+            console.log('Logged in User: ', username);
+            $('#user').text(username);
+            var fave1 = "";
+            var fave2 = "";
+            var fave3 = "";
+            var objectForMyMysql;
+
+            database.ref().on("value", function (snapshot) {
+                data = snapshot.val();
+                console.log("DATA: ", data);
+                console.log("==========================");
+                var keys = Object.keys(data.users);
+                // console.log('keys: ', keys);
+                for (var i = 0; i < keys.length; i++) {
+                    // console.log("data[keys[i]].email", data[keys[i]].email);
+                    // change this reference. 
+                    myUniqueId = keys[i];
+                    if (username === data.users[keys[i]].username) {
+
+                        console.log("found the user");
+                        console.log('[keys[i]] (unique id) : ', keys[i]);
+                        console.log('Here is his info: ', data.users[keys[i]]);
+
+                        // here, we can populate the team info.
+                        $('.teamFlag').on('click', function () {
+                            console.log('clicked');
+                            $('#nav-tab').removeClass('d-none');
+                            $('#nav-tabContent').removeClass('d-none');
+
+                        });
+
+                        // Capturing favorite teams. Saves IDs that match team ids in database table.
+                        // Values stored are strings 
+                        $('#savePreferences').on('click', function () {
+                            fave1 = $('#inputGroupSelect01').val();
+                            fave2 = $('#inputGroupSelect02').val();
+                            fave3 = $('#inputGroupSelect03').val();
+                            console.log('fave1: ', fave1);
+                            console.log('fave2: ', fave2);
+                            console.log('fave3: ', fave3);
+
+                            myInfo = {
+                                username: username,
+                                email: email,
+                                password: password,
+                                team1: fave1,
+                                team2: fave2,
+                                team3: fave3
+                            };
+
+                            // objectForMyMysql = data[keys[i]];
+                            // console.log(objectForMyMysql);
+                            console.log('my unique id: ', keys[i]);
+                            database.ref('users/' + myUniqueId).set(myInfo);
+                        });
+                    }
+                }
+            });
+
+            // LOGOUT BUTTON
+            $('#logoutButton').on('click', e => {
+                firebase.auth().signOut();
+                window.location.replace('/login');
+            });
+        </script>
 </body>
 
 </html>

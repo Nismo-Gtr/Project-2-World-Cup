@@ -1,4 +1,3 @@
-$(document).ready(function() {
 var luxon = (function (exports) {
     'use strict';
     
@@ -6892,4 +6891,3 @@ var luxon = (function (exports) {
     
     }({}));
     //# sourceMappingURL=luxon.js.map
-};

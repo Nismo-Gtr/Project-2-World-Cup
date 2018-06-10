@@ -23,7 +23,9 @@ var PORT = process.env.PORT || 3000;
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static("app/public"));
+app.use(express.static("public"));
+app.use(express.static("maps"));
+app.use(express.static("bracket"));
 
 
 // Routes
@@ -32,19 +34,35 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "./home2.html"));
 });
 
-app.use('/assets', express.static(path.join(__dirname, './public/assets')))
+// app.use('/assets', express.static(path.join(__dirname, './public/assets')))
 
 app.get("/bracket", function(req, res) {
-  res.sendFile(path.join(__dirname, "Bracket/bracket.html"));
+  res.sendFile(path.join(__dirname, "./Bracket/bracket.html"));
 });
 
 app.use('/bracket/assets', express.static(path.join(__dirname, './Bracket/assets')))
 
-app.get("/bracket", function(req, res) {
-  res.sendFile(path.join(__dirname, "Map/maps.html"));
+// get route for login page
+app.get("/login", function (req, res) {
+  res.sendFile(path.join(__dirname, "./login.html"));
 });
 
-app.use('/maps', express.static(path.join(__dirname, './maps.html')))
+// Check for user credentials match
+app.post("/authenticate", function (req, res) {
+  console.log("POST request - req.body: ", req.body)
+  res.send(req.body);
+});
+
+app.get("/userDashboard", function (req, res) {
+  res.sendFile(path.join(__dirname, "./userDashboard.html"));
+});
+
+
+app.get("/maps", function(req, res) {
+  res.sendFile(path.join(__dirname, "./Map/maps.html"));
+});
+
+app.use('/maps', express.static(path.join(__dirname, './Map/maps.html')))
 
 // Starts the server to begin listening
 

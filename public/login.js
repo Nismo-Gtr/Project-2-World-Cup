@@ -24,6 +24,8 @@ $(document).ready(function () {
     var currentUser;
     var userDisplayName;
     $('#logoutButton').hide();
+    var loginRequest = false;
+    var signupRequest = false;
 
 
 
@@ -36,19 +38,6 @@ $(document).ready(function () {
             password: $("#loginPassword").val().trim()
         }
 
-        // // Adding Firebase Auth
-        // const auth = firebase.auth();
-        // // Sign in with email and password
-        // const promise = auth.signInWithEmailAndPassword(userCredentials.email, userCredentials.password);
-        // // This logs an error if above sign in is unsuccessful
-        // promise.catch(e => console.log(e.message));
-        // console.log('logged in');
-        // console.log('user is ');
-
-        // $('#loggedInUser').text('Welcome ' + userCredentials.username);
-
-
-        // This whole things works even without a post request. Is a post request necessary? 
         // Send the POST request.
         if (userCredentials.email && userCredentials.password) {
             $.ajax("/authenticate", {
@@ -62,7 +51,7 @@ $(document).ready(function () {
                 // console.log("response.email: ", response.email);
                 // console.log("response.password: ", response.password);
 
-                // check the database for matching email/password pairs
+                // check the database for existing user by matching email/password pairs
                 database.ref('/users').on("value", function (snapshot) {
                     data = snapshot.val();
                     // console.log("DATA: ", data);
@@ -79,18 +68,16 @@ $(document).ready(function () {
                                 username: data[keys[i]].username
                             }
 
-                            // we can go ahead and redirect to another view here using data from currentUser.
                             console.log('currentUser: ', currentUser);
                             console.log(data[keys[i]]);
-
+                            
                             $('#loginModal').modal('hide');
                             $('#signupModal').modal('hide');
                             $('#loginModalButton').hide();
                             $('#signupModalButton').hide();
-                            // $('#logoutButton').show();
-                            // $('#jumbotron').removeClass('d-none');
-                            // $('#loggedInUser').text('Welcome ' + data[keys[i]].username);
-
+                            
+                            // we can go ahead and redirect to another view here using data from currentUser.
+                            localStorage.setItem('currentUser', JSON.stringify(currentUser));
                             window.location.replace('/userDashboard');
                         }
                     }
@@ -166,7 +153,8 @@ $(document).ready(function () {
             var uid = firebaseUser.uid;
             var providerData = firebaseUser.providerData;
 
-            // Capturing user email and password and saving to local temporary object
+            // Capturing user info and saving to a temporary object
+            // only thing that all social media auth and modal form auth have in common is username. we will check for username. 
             var userCredentials = {
                 username: displayName,
                 email: email,
@@ -182,10 +170,21 @@ $(document).ready(function () {
                 // Reload the page to get the updated list
                 // location.reload();
                 console.log("POST response: ", response);
-                console.log('We have a new user');
+                // console.log('We have a new user');
                 console.log("response.username", response.username);
                 console.log("response.email: ", response.email);
                 console.log("response.password: ", response.password);
+
+                // now, we will verify if user is trying to login or sign up. 
+                // if user is logging in, we will not make a new entry into database. we will look in the existing database
+                // and find user account. 
+                if (loginRequest) {
+
+                }
+                // if user is signing up, we will make a new user entry into the database. 
+
+
+
                 database.ref('/users').push(response);
                 
                 currentUser = response;
@@ -219,6 +218,31 @@ $(document).ready(function () {
     });
 
     // Firebase Google Login
+    $(".googleButtonLogin").on("click", function () {
+        console.log('clicked google in login modal');
+        loginRequest = true;
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        firebase.auth().signInWithPopup(provider).then(function (result) {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+            // ...
+        }).catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+        });
+
+    });
+
+    // Firebase Google SignUp
     $(".googleButton").on("click", function () {
         console.log('clicked google');
         var provider = new firebase.auth.GoogleAuthProvider();

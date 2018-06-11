@@ -300,17 +300,9 @@
                     myUniqueId = keys[i];
                     if (username === data.users[keys[i]].username) {
 
-                        console.log("found the user");
+                        console.log("found the user in the database");
                         console.log('[keys[i]] (unique id) : ', keys[i]);
                         console.log('Here is his info: ', data.users[keys[i]]);
-
-                        // here, we can populate the team info.
-                        $('.teamFlag').on('click', function () {
-                            console.log('clicked');
-                            $('#nav-tab').removeClass('d-none');
-                            $('#nav-tabContent').removeClass('d-none');
-
-                        });
 
                         // Capturing favorite teams. Saves IDs that match team ids in database table.
                         // Values stored are strings 
@@ -332,6 +324,14 @@
                             // console.log('my unique id: ', users[keys[i]]);
                             database.ref('users/' + myUniqueId).update(myInfo);
                             console.log('user info has been updated in firebase');
+                        });
+
+                        // here, we can populate the team info.
+                        $('.teamFlag').on('click', function () {
+                            console.log('clicked');
+                            $('#nav-tab').removeClass('d-none');
+                            $('#nav-tabContent').removeClass('d-none');
+
                         });
                     }
                 }

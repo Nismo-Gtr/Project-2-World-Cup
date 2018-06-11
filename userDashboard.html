@@ -318,10 +318,8 @@
                             fave1 = $('#inputGroupSelect01').val();
                             fave2 = $('#inputGroupSelect02').val();
                             fave3 = $('#inputGroupSelect03').val();
-                            console.log('fave1: ', fave1);
-                            console.log('fave2: ', fave2);
-                            console.log('fave3: ', fave3);
 
+                                console.log('user preferences updated. ready to be pushed to firebase')
                             myInfo = {
                                 
                                 team1: fave1,
@@ -331,8 +329,9 @@
 
                             // objectForMyMysql = data[keys[i]];
                             // console.log(objectForMyMysql);
-                            console.log('my unique id: ', keys[i]);
+                            // console.log('my unique id: ', users[keys[i]]);
                             database.ref('users/' + myUniqueId).update(myInfo);
+                            console.log('user info has been updated in firebase');
                         });
                     }
                 }

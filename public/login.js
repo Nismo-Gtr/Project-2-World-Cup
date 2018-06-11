@@ -83,13 +83,15 @@ $(document).ready(function () {
                             console.log('currentUser: ', currentUser);
                             console.log(data[keys[i]]);
 
+                            $('#loginModal').modal('hide');
+                            $('#signupModal').modal('hide');
+                            $('#loginModalButton').hide();
+                            $('#signupModalButton').hide();
                             // $('#logoutButton').show();
-                            // $('#loginModal').modal('hide');
-                            // $('#signupModal').modal('hide');
-                            // $('#loginModalButton').hide();
-                            // $('#signupModalButton').hide();
                             // $('#jumbotron').removeClass('d-none');
                             // $('#loggedInUser').text('Welcome ' + data[keys[i]].username);
+
+                            window.location.replace('/userDashboard');
                         }
                     }
                 });
@@ -134,6 +136,7 @@ $(document).ready(function () {
                 console.log("response.username", response.username);
                 console.log("response.email: ", response.email);
                 console.log("response.password: ", response.password);
+                // This will create a new user in the database
                 database.ref('/users').push(response);
                 // $('#logoutButton').show();
                 // $('#loggedInUser').text('Welcome ' + userDisplayName);
@@ -141,14 +144,9 @@ $(document).ready(function () {
                 // $('#signupModal').modal('hide');
                 // $('#loginModalButton').hide();
                 // $('#signupModalButton').hide();
-                // $('#jumbotron').removeClass('d-none');
-                // Put the object into local storage
+
+                // Put the object into local storage. This is only activated if user doesn't sign up using social media. 
                 localStorage.setItem('currentUser', JSON.stringify(userCredentials));
-                console.log('localstorage: ', localStorage);
-                if(localStorage.currentUser) {
-                    console.log('currentUser in localStorage :', localStorage);
-                }
-                
                 window.location.replace('/userDashboard');
 
             });

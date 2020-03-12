@@ -251,52 +251,70 @@
     $('#exampleModal').on('shown.bs.modal', function () {
       $('#myInput').trigger('focus')
     })
+    function CenterControl(controlDiv, map) {
 
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
+      // Set CSS for the control interior.
+      var controlText = document.createElement('div');
+      controlText.style.color = 'rgb(25,25,25)';
+      controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+      controlText.style.fontSize = '16px';
+      controlText.style.lineHeight = '38px';
+      controlText.style.paddingLeft = '5px';
+      controlText.style.paddingRight = '5px';
+      controlText.innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Create Watch Party</button>';
+      controlDiv.appendChild(controlText);
 
-      var map, infoWindow;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
-          mapTypeId: 'roadmap'
-        });
-        infoWindow = new google.maps.InfoWindow;
+    }
 
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function (position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
+    // Note: This example requires that you consent to location sharing when
+    // prompted by your browser. If you see the error "The Geolocation service
+    // failed.", it means you probably did not give permission for the browser to
 
-            var addParty = '<h4>You are here!</h4><br/><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Create Watch Party</button>';
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(addParty);
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function () {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
+    var map, infoWindow;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        mapTypeId: 'roadmap'
+      });
+      infoWindow = new google.maps.InfoWindow;
 
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
 
-        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
           infoWindow.setPosition(pos);
-          infoWindow.setContent(browserHasGeolocation ?
-            'Error: The Geolocation service failed.' :
-            'Error: Your browser doesn\'t support geolocation.');
+          infoWindow.setContent('You are here!');
           infoWindow.open(map);
-        }
+          map.setCenter(pos);
+        }, function () {
+          handleLocationError(true, infoWindow, map.getCenter());
+        });
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+          'Error: The Geolocation service failed.' :
+          'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+      var centerControlDiv = document.createElement('div');
+      var centerControl = new CenterControl(centerControlDiv, map);
+
+      centerControlDiv.index = 1;
+      map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
       var icons = {
         info: {
-          icon: './assets/IMG/soccer-game-(1).png'
+          icon: '../public/assets/IMG/soccer-game-(1).png'
         }
       };
 
@@ -597,7 +615,7 @@
             var marker = new google.maps.Marker({
               map: resultsMap,
               position: results[0].geometry.location,
-              icon: './assets/IMG/soccer-game-(1).png'
+              icon: '../public/assets/IMG/soccer-game-(1).png'
             });
             var infowindow = new google.maps.InfoWindow({ content: "<h4>" + $("#firstName").val() + " " + $("#lastName").val() + '</h4><br><button type="button" class="btn btn-secondary">RSVP</button><br><h6></h6><br>' + $("#gameSchedule").val() + "<br>" + "Max Attendence: " + $("#attendees").val() + "<br>" + address });
             marker.addListener('click', function () {

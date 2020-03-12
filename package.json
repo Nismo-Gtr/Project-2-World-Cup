@@ -4,14 +4,15 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "fs": "0.0.1-security",
     "get-json": "^1.0.0",
     "js-combinatorics": "^0.5.3",
-    "jsonfile": "^4.0.0",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.17",
     "mysql": "^2.15.0",
-    "unirest": "^0.5.1"
+    "path": "^0.12.7"
   },
   "devDependencies": {},
   "scripts": {
@@ -28,16 +29,5 @@
   "bugs": {
     "url": "https://github.com/Nismo-Gtr/Project-2-World-Cup/issues"
   },
-  "homepage": "https://github.com/Nismo-Gtr/Project-2-World-Cup#readme",
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "fs": "0.0.1-security",
-    "get-json": "^1.0.0",
-    "js-combinatorics": "^0.5.3",
-    "moment": "^2.22.2",
-    "moment-timezone": "^0.5.17",
-    "mysql": "^2.15.0",
-    "path": "^0.12.7"
-  }
+  "homepage": "https://github.com/Nismo-Gtr/Project-2-World-Cup#readme"
 }

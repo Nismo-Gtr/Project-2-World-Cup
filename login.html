@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/dashboard.css">
+    <link rel="stylesheet" href="./public/dashboard.css">
     <title>User Dashboard</title>
 </head>
 
@@ -251,14 +251,7 @@
                 </div>
             </div>
         </div>
-        <!-- JAVASCRIPT AND JQUERY -->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-        <!-- <script src="./login.js"></script> -->
-        <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
-
+        
         <script type="text/javascript">
             var firebase_config = {
                 apiKey: "AIzaSyA5y8GqPO0dVFs5xshZiFdjKgVgN9OlO0M",
@@ -299,19 +292,19 @@
                     // change this reference. 
                     myUniqueId = keys[i];
                     if (username === data.users[keys[i]].username) {
-
+                        
                         console.log("found the user");
                         console.log('[keys[i]] (unique id) : ', keys[i]);
                         console.log('Here is his info: ', data.users[keys[i]]);
-
+                        
                         // here, we can populate the team info.
                         $('.teamFlag').on('click', function () {
                             console.log('clicked');
                             $('#nav-tab').removeClass('d-none');
                             $('#nav-tabContent').removeClass('d-none');
-
+                            
                         });
-
+                        
                         // Capturing favorite teams. Saves IDs that match team ids in database table.
                         // Values stored are strings 
                         $('#savePreferences').on('click', function () {
@@ -321,7 +314,7 @@
                             console.log('fave1: ', fave1);
                             console.log('fave2: ', fave2);
                             console.log('fave3: ', fave3);
-
+                            
                             myInfo = {
                                 username: username,
                                 email: email,
@@ -330,7 +323,7 @@
                                 team2: fave2,
                                 team3: fave3
                             };
-
+                            
                             // objectForMyMysql = data[keys[i]];
                             // console.log(objectForMyMysql);
                             console.log('my unique id: ', keys[i]);
@@ -346,6 +339,14 @@
                 window.location.replace('/login');
             });
         </script>
+            <!-- JAVASCRIPT AND JQUERY -->
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+            <!-- <script src="./login.js"></script> -->
+            <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+            <script src="./public/"></script>
 </body>
 
 </html>

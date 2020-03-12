@@ -18,10 +18,10 @@ body {font-family: 'Istok Web', sans-serif;background: url("http://picjumbo.com/
 .matchup {margin:0;width: 100%;padding: 10px 0;height:60px;-webkit-transition: all 0.2s;transition: all 0.2s;}
 .score {font-size: 11px;text-transform: uppercase;float: right;color: #2C7399;font-weight: bold;font-family: 'Roboto Condensed', sans-serif;position: absolute;right: 5px;}
 .team {padding: 0 5px;margin: 3px 0;height: 25px; line-height: 25px;white-space: nowrap; overflow: hidden;position: relative;}
-.round-two .matchup {margin:0; height: 60px;padding: 50px 0;}
-.round-three .matchup {margin:0; height: 60px; padding: 130px 0;}
-.semiFinals .matchup {margin:0; height: 60px; padding: 300px 0;}
-.round-details {font-family: 'Roboto Condensed', sans-serif; font-size: 13px; color: #2C7399;text-transform: uppercase;text-align: center;height: 40px;}
+.round-two .matchup {margin:0; height: 60px;padding: 75px 0;}
+.round-three .matchup {margin:0; height: 60px; padding: 155px 0;}
+.semiFinals .matchup {margin:0; height: 60px; padding: 325px 0;}
+.round-details {font-family: 'Roboto Condensed', sans-serif; font-size: 13px; color: #2C7399;text-transform: uppercase;text-align: center;height: 40px;margin-bottom: 20px;}
 .champion li, .round li {background-color: #fff;box-shadow: none; opacity: 0.45;}
 .current li {opacity: 1;}
 .current li.team {background-color: #fff;box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);opacity: 1;}
@@ -30,7 +30,7 @@ body {font-family: 'Istok Web', sans-serif;background: url("http://picjumbo.com/
 .share-icon {font-size: 24px; color: #fff;padding: 25px;}
 .share-wrap {max-width: 1100px; text-align: center; margin: 60px auto;}
 .final {margin: 4.5em 0;}
-
+.matchup .round-details span a:hover, .champion .round-details span a:hover{color: #2C7399;}
 @-webkit-keyframes pulse {
   0% {
     -webkit-transform: scale(1);
